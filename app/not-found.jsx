@@ -1,4 +1,4 @@
-import ErrorPage from "./_components/ErrorPage";
+import ErrorPage from "./_components/UI/ErrorPage";
 
 function Error() {
   return <ErrorPage />;

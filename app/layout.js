@@ -1,3 +1,5 @@
+import Footer from "./_components/UI/Footer";
+import Header from "./_components/UI/Header";
 import "./_styles/globals.css";
 export const metadata = {
   title: {
@@ -11,7 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`min-h-screen flex flex-col relative`}>
+        <Header />
         <div>{children}</div>
+        <Footer />
       </body>
     </html>
   );
