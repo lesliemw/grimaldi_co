@@ -5,8 +5,8 @@ import { IoBagHandleOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import SearchBar from "./SearchBar";
-// import AccountDropdownMenu from "./components/Accounts/AccountDropdownMenu";
-// import CartPopper from "./components/Cart/CartPopper";
+import AccountDropdownMenu from "./components/Accounts/AccountDropdownMenu";
+import CartPopper from "./components/Cart/CartPopper";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
 
@@ -49,19 +49,19 @@ function Header() {
         </Link>
       </div>
       <div className="flex sm:mr-5 ">
-        {/* <AccountDropdownMenu /> */}
+        <AccountDropdownMenu />
 
         <button onClick={isOpenCartToggle} className="flex sm:p-2 items-center">
           <IoBagHandleOutline className="md:m-2 text-xl md:text-md lg:text-2xl" />
           <span className="invisible sm:visible">Cart</span>
         </button>
-        {/* {isOpenCart && (
+        {isOpenCart && (
           <CartPopper
             setIsOpenCart={setIsOpenCart}
             isOpenCart={isOpenCart}
             isOpenCartToggle={isOpenCartToggle}
           />
-        )} */}
+        )}
       </div>
     </header>
   );

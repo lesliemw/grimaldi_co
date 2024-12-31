@@ -1,105 +1,66 @@
 "use client";
 import { GoPerson } from "react-icons/go";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItems,
+  MenuItem,
+} from "@headlessui/react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 function AccountDropdownMenu() {
-  const router = useRouter();
-  const { data: session } = useSession();
-
-  function handleSignOut() {
-    console.log("signed out");
-    signOut();
-    router.push("/");
-  }
-
-  function goToLoginPage() {
-    router.push("/user/login");
-  }
-
   return (
-    <Menu as="div" className="relative inline-block  font-extralight text-left">
+    <Menu as="div" className="relative inline-block font-extralight text-left">
       <div>
-        <Menu.Button className=" w-full font-themeFont justify-center gap-x-1.5 rounded-md bg-white md:px-3 py-2  text-gray-700  ring-inset   flex md:p-2 items-center">
-          <GoPerson className="m-2 text-xl md:text-md lg:text-2xl " />
+        <MenuButton className="w-full font-themeFont justify-center gap-x-1.5 rounded-md bg-white md:px-3 py-2 text-gray-700 ring-inset flex md:p-2 items-center">
+          <GoPerson className="m-2 text-xl md:text-md lg:text-2xl" />
           <span className="invisible sm:visible">Account</span>
-        </Menu.Button>
+        </MenuButton>
       </div>
 
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      
+        <MenuItems
+        transition
+          anchor="bottom end"
+          className="w-52 origin-top-right rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"> 
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <Link
-                  href={"/"}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Orders
-                </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <Link
-                  href={"/"}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Wish List
-                </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <Link
-                  href="/account"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Account Settings
-                </Link>
-              )}
-            </Menu.Item>
-
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block w-full px-4 py-2 text-left text-sm"
-                  )}
-                >
-                  {session ? "Sign Out" : "Sign In"}
-                </button>
-              )}
-            </Menu.Item>
+            <MenuItem>
+              <Link
+                href="/orders"
+                className="data-[active]:bg-gray-100 data-[active]:text-gray-900 text-gray-700 block px-4 py-2 text-sm"
+              >
+                Orders
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link
+                href="/wishlist"
+                className="data-[active]:bg-gray-100 data-[active]:text-gray-900 text-gray-700 block px-4 py-2 text-sm"
+              >
+                Wish List
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link
+                href="/account"
+                className="data-[active]:bg-gray-100 data-[active]:text-gray-900 text-gray-700 block px-4 py-2 text-sm"
+              >
+                Account Settings
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <button
+                className="data-[active]:bg-gray-100 data-[active]:bg-gray-100text-gray-900  text-gray-700
+                  block w-full px-4 py-2 text-left text-sm"
+              >
+                Sign out
+              </button>
+            </MenuItem>
           </div>
-        </Menu.Items>
+        </MenuItems>
       </Transition>
     </Menu>
   );
 }
+
 export default AccountDropdownMenu;

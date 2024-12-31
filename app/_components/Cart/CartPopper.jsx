@@ -1,7 +1,13 @@
 // import CartItem from "./CartItem";
 
 import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
 // import fakeData from "@components/fakeStore";
@@ -9,9 +15,9 @@ import Link from "next/link";
 
 export default function CartPopper({}) {
   return (
-    <Transition.Root show="" onClose="" as={Fragment}>
+    <Transition show="" onClose="" as={Fragment}>
       <Dialog as="div" className="relative z-20">
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-in-out duration-500"
           enterFrom="opacity-0"
@@ -21,12 +27,12 @@ export default function CartPopper({}) {
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className="fixed inset-0 font-themeFont overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <Transition.Child
+              <TransitionChild
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                 enterFrom="translate-x-full"
@@ -35,13 +41,13 @@ export default function CartPopper({}) {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
+                <DialogPanel className="pointer-events-auto w-screen max-w-md">
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">
+                        <DialogTitle className="text-lg font-medium text-gray-900">
                           Shopping cart
-                        </Dialog.Title>
+                        </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -119,12 +125,12 @@ export default function CartPopper({}) {
                       </div>
                     </div>
                   </div>
-                </Dialog.Panel>
-              </Transition.Child>
+                </DialogPanel>
+              </TransitionChild>
             </div>
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }
