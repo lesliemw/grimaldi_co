@@ -16,7 +16,7 @@
 
 //notes
 
-//features:
+<h3>features:</h3>
 -cart
 -authentication
 -local storage
@@ -26,7 +26,7 @@
 -server
 -context for login in info as it will be used throughout
 
-//ui
+<h3>ui</h3>
 -sidebar
 -product cards
 -account details page
