@@ -48,7 +48,7 @@ function HomeScreenCallouts() {
           <div className="mt-6  grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {callouts.map((callout) => (
               <div key={callout.name} className="group relative">
-                <div className="relative flex-1 h-80 w-full overflow-hidden bg-white">
+                <div className="relative flex-1 h-96 w-full overflow-hidden bg-white">
                   <Image
                     src={callout.image}
                     alt={callout.alt}
