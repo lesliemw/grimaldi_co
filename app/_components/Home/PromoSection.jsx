@@ -27,7 +27,7 @@ export default function PromoSection() {
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                         <Image
-                          src="/jacket.jpg"
+                          src="/textiles.jpg"
                           alt=""
                           width={500}
                           height={500}
@@ -36,36 +36,7 @@ export default function PromoSection() {
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          src="/jacket.jpg"
-                          alt=""
-                          width={500}
-                          height={500}
-                          className="h-full w-full object-cover object-center"
-                        />
-                      </div>
-                    </div>
-                    <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <Image
-                          src="/jacket.jpg"
-                          alt=""
-                          width={500}
-                          height={500}
-                          className="h-full w-full object-cover object-center"
-                        />
-                      </div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <Image
-                          src="/jacket.jpg"
-                          alt=""
-                          width={500}
-                          height={500}
-                          className="h-full w-full object-cover object-center"
-                        />
-                      </div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <Image
-                          src="/jacket.jpg"
+                          src="/whitedress.jpg"
                           alt=""
                           width={500}
                           height={500}
@@ -76,7 +47,7 @@ export default function PromoSection() {
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          src="/jacket.jpg"
+                          src="/bwman.jpg"
                           alt=""
                           width={500}
                           height={500}
@@ -85,7 +56,36 @@ export default function PromoSection() {
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          src="/jacket.jpg"
+                          src="/man.jpg"
+                          alt=""
+                          width={500}
+                          height={500}
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <Image
+                          src="/womenshoes.jpg"
+                          alt=""
+                          width={500}
+                          height={500}
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <Image
+                          src="/pantsuit.jpg"
+                          alt=""
+                          width={500}
+                          height={500}
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <Image
+                          src="/menshoes.jpg"
                           alt=""
                           width={500}
                           height={500}

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function UpdateAccountDetails() {
   return (
     <form className="m-40 place-center font-themeFont w-auto">
@@ -305,18 +307,22 @@ export default function UpdateAccountDetails() {
             </fieldset>
           </div>
           <div className="m-6 flex items-center justify-end gap-x-6 ">
-            <button
-              type="button"
-              className="text-sm font-semibold cursor-pointer leading-6 text-gray-900"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer"
-            >
-              Save
-            </button>
+            <Link href="/account">
+              <button
+                type="button"
+                className="text-sm font-semibold cursor-pointer leading-6 text-gray-900"
+              >
+                Cancel
+              </button>
+            </Link>
+            <Link href="/account">
+              <button
+                type="submit"
+                className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer"
+              >
+                Save
+              </button>
+            </Link>
           </div>
         </div>
       </div>
