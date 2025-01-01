@@ -13,9 +13,13 @@ import Link from "next/link";
 // import fakeData from "@components/fakeStore";
 // import { useSelector } from "react-redux";
 
-export default function CartPopper({}) {
+export default function CartPopper({
+  setIsOpenCart,
+  isOpenCart,
+  isOpenCartToggle,
+}) {
   return (
-    <Transition show="" onClose="" as={Fragment}>
+    <Transition show={isOpenCart} onClose={isOpenCartToggle} as={Fragment}>
       <Dialog as="div" className="relative z-20">
         <TransitionChild
           as={Fragment}
@@ -50,6 +54,7 @@ export default function CartPopper({}) {
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
+                            onClick={isOpenCartToggle}
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
                           >
@@ -105,6 +110,7 @@ export default function CartPopper({}) {
                       <div className="mt-6">
                         <Link
                           href={"/cart"}
+                          onClick={isOpenCartToggle}
                           // disabled={!cart?.length}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 disabled:cursor-not-allowed px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
                         >
@@ -116,6 +122,7 @@ export default function CartPopper({}) {
                           or {""}
                           <button
                             type="button"
+                            onClick={isOpenCartToggle}
                             className="font-medium text-indigo-500 hover:text-indigo-600"
                           >
                             Continue Shopping

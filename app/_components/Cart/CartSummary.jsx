@@ -1,5 +1,4 @@
 "use client";
-import { useSelector } from "react-redux";
 import CartHeader from "./cartScreen/CartHeader";
 import CartOrderSummary from "./cartScreen/CartOrderSummary";
 import CartProducts from "./cartScreen/CartProducts";

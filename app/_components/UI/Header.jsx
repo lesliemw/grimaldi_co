@@ -5,8 +5,8 @@ import { IoBagHandleOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import SearchBar from "./SearchBar";
-import AccountDropdownMenu from "./components/Accounts/AccountDropdownMenu";
-import CartPopper from "./components/Cart/CartPopper";
+import CartPopper from "../Cart/CartPopper";
+import AccountDropdownMenu from "../Accounts/AccountDropdownMenu";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
 

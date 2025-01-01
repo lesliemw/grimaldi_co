@@ -1,5 +1,5 @@
 import Image from "next/image";
-import QuantityCounter from "@components/ui/QuantityCounter";
+import QuantityCounter from "../../UI/QuantityCounter";
 
 function CartProducts() {
   return (
