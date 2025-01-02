@@ -101,16 +101,6 @@ export default function AccountDetails() {
               <h4>Ireland</h4>
             </div>
           </div>
-          <div className="m-6 flex items-center justify-end gap-x-6 ">
-            <Link href="/account/updateAccountDetails">
-              <button
-                type="submit"
-                className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                Edit Details
-              </button>
-            </Link>
-          </div>
         </div>
 
         <div className="border-b border-gray-900/10 pb-12">
@@ -134,7 +124,9 @@ export default function AccountDetails() {
                       id="orderDetails"
                       name="orderDetails"
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
+                      disabled
+                      checked
+                      className="cursor-not-allowed h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
                   </div>
                   <div className="text-sm leading-6">
@@ -156,7 +148,8 @@ export default function AccountDetails() {
                       id="offers"
                       name="offers"
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
+                      disabled
+                      className="cursor-not-allowed h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
                   </div>
                   <div className="text-sm leading-6">
@@ -170,58 +163,6 @@ export default function AccountDetails() {
                       Get notified of the latest offers.
                     </p>
                   </div>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend className="text-sm font-semibold leading-6 text-gray-900">
-                Push Notifications
-              </legend>
-              <p className="mt-1 text-sm leading-6 text-gray-600">
-                These are delivered via SMS to your mobile phone.
-              </p>
-              <div className="mt-6 space-y-6">
-                <div className="flex items-center gap-x-3">
-                  <input
-                    id="push-everything"
-                    name="push-notifications"
-                    type="radio"
-                    className="h-4 w-4 border-gray-300 text-indigo-500 focus:ring-indigo-500"
-                  />
-                  <label
-                    htmlFor="push-everything"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Everything
-                  </label>
-                </div>
-                <div className="flex items-center gap-x-3">
-                  <input
-                    id="push-email"
-                    name="push-notifications"
-                    type="radio"
-                    className="h-4 w-4 border-gray-300 text-indigo-500 focus:ring-indigo-500"
-                  />
-                  <label
-                    htmlFor="push-email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Same as email
-                  </label>
-                </div>
-                <div className="flex items-center gap-x-3">
-                  <input
-                    id="push-nothing"
-                    name="push-notifications"
-                    type="radio"
-                    className="h-4 w-4 border-gray-300 text-indigo-500 focus:ring-indigo-500"
-                  />
-                  <label
-                    htmlFor="push-nothing"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    No push notifications
-                  </label>
                 </div>
               </div>
             </fieldset>
