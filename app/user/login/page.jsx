@@ -1,12 +1,26 @@
 "use client";
-import { login } from "@/app/_services/apiAuth";
-// import { cp } from "fs";
+import { useLogin } from "@/app/_hooks/auth/useLogin";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, isLoading } = useLogin();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email || !password) return;
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
+      }
+    );
+  }
 
   return (
     <>
@@ -18,7 +32,12 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" onSubmit={login} method="POST">
+          <form
+            className="space-y-6"
+            action="#"
+            onSubmit={handleSubmit}
+            method="POST"
+          >
             <div>
               <label
                 htmlFor="email"
@@ -72,7 +91,6 @@ export default function Login() {
             <div>
               <button
                 type="submit"
-                onClick={signInWithEmail}
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
