@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import Footer from "./_components/UI/Footer";
 import Header from "./_components/UI/Header";
 import "./_styles/globals.css";
@@ -16,6 +17,13 @@ export default function RootLayout({ children }) {
         <Header />
         <div>{children}</div>
         <Footer />
+        <Toaster
+          toastOptions={{
+            style: {
+              textAlign: "center",
+            },
+          }}
+        />
       </body>
     </html>
   );

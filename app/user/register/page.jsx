@@ -1,8 +1,42 @@
 "use client";
 
+import { signup } from "@/app/_services/apiAuth";
 import Link from "next/link";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function RegistrationForm() {
+  const [user, setUser] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+  });
+
+  const { fname, lname, email, password } = user;
+
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const { error } = await signup(user);
+      if (error) {
+        throw new Error(error.message);
+      }
+      toast.success("Account created successfully");
+      console.log("User signed up:", user);
+    } catch (err) {
+      toast.error(err.message || "An error occurred during signup");
+    }
+  }
+
   return (
     <>
       <div className="flex h-full flex-1 flex-col   justify-center  px-6 py-40 font-themeFont lg:px-8">
@@ -13,7 +47,7 @@ export default function RegistrationForm() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
                 htmlFor="fname"
@@ -25,10 +59,10 @@ export default function RegistrationForm() {
                 <input
                   id="fname"
                   name="fname"
-                  value="Leslie"
                   type="text"
+                  value={fname}
                   required
-                  onChange={(e) => setUser({ ...user, fname: e.target.value })}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -44,10 +78,10 @@ export default function RegistrationForm() {
                 <input
                   id="lname"
                   name="lname"
-                  value="Kavanagh"
                   type="text"
+                  value={lname}
                   required
-                  onChange={(e) => setUser({ ...user, lname: e.target.value })}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -63,11 +97,11 @@ export default function RegistrationForm() {
                 <input
                   id="email"
                   name="email"
-                  value="l.marie1598@gmail.com"
                   type="email"
+                  value={email}
                   autoComplete="email"
                   required
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  onChange={handleInputChange}
                   className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -86,13 +120,10 @@ export default function RegistrationForm() {
                 <input
                   id="password"
                   name="password"
-                  value=""
                   type="password"
-                  autoComplete="current-password"
+                  value={password}
                   required
-                  onChange={(e) =>
-                    setUser({ ...user, password: e.target.value })
-                  }
+                  onChange={handleInputChange}
                   className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>

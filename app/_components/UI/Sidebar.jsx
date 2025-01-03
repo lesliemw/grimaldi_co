@@ -10,8 +10,9 @@ import { HiXMark } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
+import { logout } from "@/app/_services/apiAuth";
 
-function Sidebar({ isOpenSidebar, setIsOpenSidebar, isOpenSidebarToggle }) {
+function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
   return (
     <Transition
       show={isOpenSidebar}
@@ -110,7 +111,7 @@ function Sidebar({ isOpenSidebar, setIsOpenSidebar, isOpenSidebarToggle }) {
                       </button>
                     </Link>
 
-                    <button className="flex ml-3 items-center">
+                    <button onClick={logout} className="flex ml-3 items-center">
                       <IoIosLogOut className="m-3 text-sm md:text-md lg:text-2xl" />
 
                       <span>Sign Out</span>

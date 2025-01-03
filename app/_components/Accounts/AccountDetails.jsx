@@ -3,14 +3,14 @@ import Link from "next/link";
 
 export default function AccountDetails() {
   return (
-    <div className="my-40 font-themeFont flex justify-center w-full	">
-      <div className="space-y-12 ">
-        <div className="border-b border-gray-900/10 pb-12">
+    <div className="mb-24 mt-10 p-8 font-themeFont flex justify-center w-full	">
+      <div className="space-y-8">
+        <div className="border-b border-gray-900/10 pb-6">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Account Details
           </h2>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
             <div className="sm:col-span-2">
               <label
                 htmlFor="first-name"
@@ -103,7 +103,7 @@ export default function AccountDetails() {
           </div>
         </div>
 
-        <div className="border-b border-gray-900/10 pb-12">
+        <div className="border-b border-gray-900/10 pb-8">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Notifications
           </h2>
@@ -112,12 +112,12 @@ export default function AccountDetails() {
             what else you want to hear about.
           </p>
 
-          <div className="mt-10 space-y-10">
+          <div className="mt-6 space-y-10">
             <fieldset>
               <legend className="text-sm font-semibold leading-6 text-gray-900">
                 By Email
               </legend>
-              <div className="mt-6 space-y-6">
+              <div className="mt-6 space-y-2">
                 <div className="relative flex gap-x-3">
                   <div className="flex h-6 items-center">
                     <input
@@ -167,7 +167,7 @@ export default function AccountDetails() {
               </div>
             </fieldset>
           </div>
-          <div className="m-6 flex items-center justify-end gap-x-6 ">
+          <div className="m-2 flex items-center justify-end gap-x-6 ">
             <Link href="/account/updateAccountDetails">
               <button
                 type="submit"

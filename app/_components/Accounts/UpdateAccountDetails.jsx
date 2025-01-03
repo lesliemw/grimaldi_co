@@ -4,17 +4,14 @@ import Link from "next/link";
 
 export default function UpdateAccountDetails() {
   return (
-    <form className="m-40 place-center font-themeFont w-auto">
-      <div className="space-y-12 ">
+    <form className="m-16 lg:mx-60 lg:mt-20 place-center font-themeFont w-auto">
+      <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Account Details
+            Let's Update Your Account Details
           </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Let us know where to send your orders.
-          </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
                 htmlFor="fname"
