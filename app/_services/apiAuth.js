@@ -6,8 +6,12 @@ export async function signup({ fname, lname, email, password }) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    fname,
-    lname,
+    options: {
+      data: {
+        fname,
+        lname,
+      },
+    },
   });
   if (error) throw new Error(toast.error(error.message));
   return data;

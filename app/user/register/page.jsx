@@ -1,40 +1,17 @@
 "use client";
 
-import { signup } from "@/app/_services/apiAuth";
+import { useSignup } from "@/app/_services/useSignup";
 import Link from "next/link";
-import { useState } from "react";
-import toast from "react-hot-toast";
+
+import { useForm } from "react-hook-form";
 
 export default function RegistrationForm() {
-  const [user, setUser] = useState({
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-  });
+  const { signup, isLoading } = useSignup();
+  const { register, formState, getValues, handleSubmit, reset } = useForm();
+  const { errors } = formState;
 
-  const { fname, lname, email, password } = user;
-
-  function handleInputChange(e) {
-    const { name, value } = e.target;
-    setUser((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const { error } = await signup(user);
-      if (error) {
-        throw new Error(error.message);
-      }
-      toast.success("Account created successfully");
-      console.log("User signed up:", user);
-    } catch (err) {
-      toast.error(err.message || "An error occurred during signup");
-    }
+  function onSubmit({ fname, lname, email, password }) {
+    signup({ fname, lname, email, password });
   }
 
   return (
@@ -47,7 +24,7 @@ export default function RegistrationForm() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label
                 htmlFor="fname"
@@ -57,12 +34,12 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
+                  error={errors?.fname?.message}
                   id="fname"
                   name="fname"
                   type="text"
-                  value={fname}
-                  required
-                  onChange={handleInputChange}
+                  disabled={isLoading}
+                  {...register("fname", { required: "This field is required" })}
                   className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -76,12 +53,12 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
+                  error={errors?.lname?.message}
                   id="lname"
                   name="lname"
                   type="text"
-                  value={lname}
-                  required
-                  onChange={handleInputChange}
+                  disabled={isLoading}
+                  {...register("lname", { required: "This field is required" })}
                   className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -95,13 +72,19 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
+                  error={errors?.email?.message}
                   id="email"
                   name="email"
                   type="email"
-                  value={email}
                   autoComplete="email"
-                  required
-                  onChange={handleInputChange}
+                  disabled={isLoading}
+                  {...register("email", {
+                    required: "This field is required",
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: "Please provide a valid email address",
+                    },
+                  })}
                   className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -118,12 +101,18 @@ export default function RegistrationForm() {
               </div>
               <div className="mt-2">
                 <input
+                  error={errors?.password?.message}
                   id="password"
                   name="password"
                   type="password"
-                  value={password}
-                  required
-                  onChange={handleInputChange}
+                  disabled={isLoading}
+                  {...register("password", {
+                    required: "This field is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must have a minimum of 8 characters.",
+                    },
+                  })}
                   className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -132,7 +121,7 @@ export default function RegistrationForm() {
             <div>
               <button
                 type="submit"
-                // disabled={error}
+                disabled={isLoading}
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 disabled:cursor-not-allowed focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign up
