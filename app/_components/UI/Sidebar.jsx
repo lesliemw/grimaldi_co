@@ -10,9 +10,11 @@ import { HiXMark } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
-import { logout } from "@/app/_services/apiAuth";
+import { getCurrentUser, logout } from "@/app/_services/apiAuth";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
+  const { user } = getCurrentUser();
+
   return (
     <Transition
       show={isOpenSidebar}
@@ -49,7 +51,9 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
                         <DialogTitle className="text-lg font-medium text-gray-900">
-                          Leslie Kavanagh
+                          {user
+                            ? `Welcome back, ${user.fname} ${user.lname}`
+                            : "Welcome"}
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button

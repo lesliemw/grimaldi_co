@@ -1,6 +1,6 @@
 "use client";
 
-import { useSignup } from "@/app/_services/useSignup";
+import { useSignup } from "@/app/_hooks/auth/useSignup";
 import Link from "next/link";
 
 import { useForm } from "react-hook-form";
