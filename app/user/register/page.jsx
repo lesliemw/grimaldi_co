@@ -1,18 +1,12 @@
 "use client";
 
-import { useSignup } from "@/app/_hooks/auth/useSignup";
 import Link from "next/link";
 
 import { useForm } from "react-hook-form";
 
 export default function RegistrationForm() {
-  const { signup, isLoading } = useSignup();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
-
-  function onSubmit({ fname, lname, email, password }) {
-    signup({ fname, lname, email, password });
-  }
 
   return (
     <>
@@ -24,7 +18,7 @@ export default function RegistrationForm() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form className="space-y-6">
             <div>
               <label
                 htmlFor="fname"
@@ -34,7 +28,7 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
-                  error={errors?.fname?.message}
+                  // error={errors?.fname?.message}
                   id="fname"
                   name="fname"
                   type="text"
@@ -53,7 +47,7 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
-                  error={errors?.lname?.message}
+                  // error={errors?.lname?.message}
                   id="lname"
                   name="lname"
                   type="text"
@@ -72,7 +66,7 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
-                  error={errors?.email?.message}
+                  // error={errors?.email?.message}
                   id="email"
                   name="email"
                   type="email"
@@ -101,7 +95,7 @@ export default function RegistrationForm() {
               </div>
               <div className="mt-2">
                 <input
-                  error={errors?.password?.message}
+                  // error={errors?.password?.message}
                   id="password"
                   name="password"
                   type="password"

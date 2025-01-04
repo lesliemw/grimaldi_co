@@ -1,4 +1,4 @@
-import UpdateAccountDetails from "@/app/_components/Accounts/UpdateAccountDetails";
+import UpdateAccountDetails from "../../_components/Accounts/UpdateAccountDetails";
 
 function UpdateAccountDetailsPage() {
   return <UpdateAccountDetails />;

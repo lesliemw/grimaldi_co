@@ -1,26 +1,10 @@
 "use client";
-import { useLogin } from "@/app/_hooks/auth/useLogin";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoading } = useLogin();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!email || !password) return;
-    login(
-      { email, password },
-      {
-        onSettled: () => {
-          setEmail("");
-          setPassword("");
-        },
-      }
-    );
-  }
 
   return (
     <>
@@ -32,12 +16,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            action="#"
-            onSubmit={handleSubmit}
-            method="POST"
-          >
+          <form className="space-y-6" action="#" method="POST">
             <div>
               <label
                 htmlFor="email"
