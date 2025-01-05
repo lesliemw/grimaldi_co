@@ -12,6 +12,7 @@ export default function RegistrationForm() {
 
   function onSubmit({ fname, lname, email, password }) {
     signup({ fname, lname, email, password });
+    console.log({ fname, lname, email, password });
   }
 
   return (
