@@ -22,6 +22,8 @@ export default function RootLayout({ children }) {
           <div>{children}</div>
           <Footer />
           <Toaster
+            position="top-right"
+            reverseOrder={false}
             toastOptions={{
               style: {
                 textAlign: "center",

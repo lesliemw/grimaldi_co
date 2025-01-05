@@ -1,12 +1,18 @@
 "use client";
 
+import { useSignup } from "../../_api/useSignup";
 import Link from "next/link";
 
 import { useForm } from "react-hook-form";
 
-export default function RegistrationForm() {
-  const { register, formState, getValues, handleSubmit, reset } = useForm();
+export default function RegistrationForm({ fname, lname, email, password }) {
+  const { signup, isLoading } = useSignup();
+  const { register, formState, handleSubmit } = useForm();
   const { errors } = formState;
+
+  function onSubmit({ fname, lname, email, password }) {
+    signup({ fname, lname, email, password });
+  }
 
   return (
     <>
@@ -18,7 +24,7 @@ export default function RegistrationForm() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label
                 htmlFor="fname"
@@ -28,7 +34,7 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
-                  // error={errors?.fname?.message}
+                  error={errors?.fname?.message}
                   id="fname"
                   name="fname"
                   type="text"
@@ -47,7 +53,7 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
-                  // error={errors?.lname?.message}
+                  error={errors?.lname?.message}
                   id="lname"
                   name="lname"
                   type="text"
@@ -66,7 +72,7 @@ export default function RegistrationForm() {
               </label>
               <div className="mt-2">
                 <input
-                  // error={errors?.email?.message}
+                  error={errors?.email?.message}
                   id="email"
                   name="email"
                   type="email"
@@ -95,7 +101,7 @@ export default function RegistrationForm() {
               </div>
               <div className="mt-2">
                 <input
-                  // error={errors?.password?.message}
+                  error={errors?.password?.message}
                   id="password"
                   name="password"
                   type="password"
@@ -104,7 +110,7 @@ export default function RegistrationForm() {
                     required: "This field is required",
                     minLength: {
                       value: 6,
-                      message: "Password must have a minimum of 8 characters.",
+                      message: "Password must have a minimum of 6 characters.",
                     },
                   })}
                   className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
