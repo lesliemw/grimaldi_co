@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUser } from "./apiAuth";
-import toast from "react-hot-toast";
+import { getCurrentUser } from "./apiAuth";
 
 export function useUser() {
   const { isLoading, data: user } = useQuery({
     queryKey: ["user"],
-    queryFn: getUser,
+    queryFn: getCurrentUser,
   });
   return {
     isLoading,
