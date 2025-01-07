@@ -2,8 +2,12 @@
 import { GoPerson } from "react-icons/go";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
 import Link from "next/link";
+import { useAuth } from "../../_context/authContext";
+import { useLogout } from "../../_api/useLogout";
 
 function AccountDropdownMenu() {
+  const { user } = useAuth();
+  const { logout, isLoading } = useLogout();
   return (
     <Menu as="div" className="relative inline-block font-extralight text-left">
       <div>
@@ -44,12 +48,23 @@ function AccountDropdownMenu() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <button
-              className="data-[active]:bg-gray-100 data-[active]:bg-gray-100text-gray-900  text-gray-700
+            {user ? (
+              <button
+                onClick={logout}
+                disabled={isLoading}
+                className="data-[active]:bg-gray-100 data-[active]:bg-gray-100text-gray-900  text-gray-700
                   block w-full px-4 py-2 text-left text-sm"
-            >
-              Sign out
-            </button>
+              >
+                Sign out
+              </button>
+            ) : (
+              <button
+                className="data-[active]:bg-gray-100 data-[active]:bg-gray-100text-gray-900  text-gray-700
+                  block w-full px-4 py-2 text-left text-sm"
+              >
+                <Link href="/user/login">Sign in</Link>
+              </button>
+            )}
           </MenuItem>
         </div>
       </MenuItems>

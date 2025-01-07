@@ -1,41 +1,5 @@
 import { supabase } from "../_utils/supabase";
 
-export async function createUserFromAuth(user) {
-  try {
-    // Ensure the required fields are available
-    const { id, email, created_at, user_metadata } = user;
-
-    if (!id || !email) {
-      throw new Error("Missing required user fields (id or email).");
-    }
-
-    // Extract additional data from user_metadata
-    const { fname, lname } = user_metadata || {};
-
-    // Insert the user into the custom "user" table
-    const { data: insertedUser, error: userError } = await supabase
-      .from("user")
-      .insert({
-        id,
-        email,
-        created_at,
-        fname,
-        lname,
-      })
-      .select();
-
-    if (userError) {
-      console.error("Insert error details:", userError);
-      throw new Error(`Failed to create user: ${userError.message}`);
-    }
-
-    return insertedUser;
-  } catch (error) {
-    console.error("Error creating user:", error.message);
-    throw error;
-  }
-}
-
 export async function signup({ fname, lname, email, password }) {
   try {
     // Sign up the user with Supabase Auth
@@ -87,6 +51,7 @@ export async function login({ email, password }) {
     password,
   });
   if (error) throw new Error(error.message);
+  console.log(data);
   return data;
 }
 
@@ -97,11 +62,13 @@ export async function getCurrentUser() {
 
   const { data, error } = await supabase.auth.getUser();
   if (error) throw new Error(error.message);
+
   return data?.user;
 }
 
 export async function logout() {
   const { error } = await supabase.auth.signOut();
+  console.log("signedout");
   if (error) throw new Error(error.message);
 }
 

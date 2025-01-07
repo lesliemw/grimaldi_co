@@ -12,10 +12,3 @@ export function useUser() {
     isAuthenticated: user?.role === "authenticated",
   };
 }
-
-// const {
-//   user: {
-//     email,
-//     user_metadata: { fullName: currentFullName },
-//   },
-// } = useUser();

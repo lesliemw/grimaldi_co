@@ -10,9 +10,17 @@ import { HiXMark } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
-import { useUser } from "../../_api/useUser";
+import { useAuth } from "../../_context/authContext";
+import { useLogout } from "../../_api/useLogout";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
+  const { user } = useAuth();
+  const { logout, isLoading } = useLogout();
+
+  function handleClick() {
+    isOpenSidebarToggle();
+  }
+
   return (
     <Transition
       show={isOpenSidebar}
@@ -49,7 +57,7 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
                         <DialogTitle className="text-lg font-medium text-gray-900">
-                          Welcome,
+                          {user ? `Welcome, ${user.fname}` : "Welcome"}
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
@@ -111,11 +119,28 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                       </button>
                     </Link>
 
-                    <button className="flex ml-3 items-center">
-                      <IoIosLogOut className="m-3 text-sm md:text-md lg:text-2xl" />
+                    {user ? (
+                      <button
+                        className="flex ml-3 items-center"
+                        onClick={logout}
+                        disabled={isLoading}
+                      >
+                        <IoIosLogOut className="m-3 text-sm md:text-md lg:text-2xl" />
 
-                      <span>Sign Out</span>
-                    </button>
+                        <span>Sign Out</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleClick}
+                        className="flex ml-3 items-center"
+                      >
+                        <IoIosLogIn className="m-3 text-sm md:text-md lg:text-2xl" />
+
+                        <Link href="/user/login">
+                          <span>Sign In</span>
+                        </Link>
+                      </button>
+                    )}
                   </div>
                 </DialogPanel>
               </TransitionChild>

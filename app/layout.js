@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import Footer from "./_components/UI/Footer";
 import Header from "./_components/UI/Header";
 import { TanstackProvider } from "./_components/Providers/TanstackProvider";
+import { AuthProvider } from "./_context/authContext";
 
 import "./_styles/globals.css";
 
@@ -17,20 +18,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`min-h-screen`}>
-        <TanstackProvider>
-          <Header />
-          <div>{children}</div>
-          <Footer />
-          <Toaster
-            position="top-right"
-            reverseOrder={false}
-            toastOptions={{
-              style: {
-                textAlign: "center",
-              },
-            }}
-          />
-        </TanstackProvider>
+        <AuthProvider>
+          <TanstackProvider>
+            <Header />
+            <div>{children}</div>
+            <Footer />
+            <Toaster
+              position="top-right"
+              reverseOrder={false}
+              toastOptions={{
+                style: {
+                  textAlign: "center",
+                },
+              }}
+            />
+          </TanstackProvider>
+        </AuthProvider>
       </body>
     </html>
   );
