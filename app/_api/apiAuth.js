@@ -51,24 +51,30 @@ export async function login({ email, password }) {
     password,
   });
   if (error) throw new Error(error.message);
-  console.log(data);
   return data;
 }
 
-export async function getCurrentUser() {
+async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
 
-  if (!session.session) return null;
+  if (!session?.session) return null;
 
-  const { data, error } = await supabase.auth.getUser();
+  const userId = session.session.user.id;
+
+  // Fetch data from your custom "user" table
+  const { data, error } = await supabase
+    .from("user") // Replace "user" with your actual table name if different
+    .select("*") // Select specific fields if needed
+    .eq("id", userId)
+    .single();
+
   if (error) throw new Error(error.message);
 
-  return data?.user;
+  return data; // This will return the user data from the custom table
 }
 
 export async function logout() {
   const { error } = await supabase.auth.signOut();
-  console.log("signedout");
   if (error) throw new Error(error.message);
 }
 

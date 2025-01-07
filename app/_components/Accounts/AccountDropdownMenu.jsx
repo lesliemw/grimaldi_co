@@ -2,7 +2,7 @@
 import { GoPerson } from "react-icons/go";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
 import Link from "next/link";
-import { useAuth } from "../../_context/authContext";
+import { useAuth } from "../../_context/userContext";
 import { useLogout } from "../../_api/useLogout";
 
 function AccountDropdownMenu() {

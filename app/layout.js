@@ -2,7 +2,7 @@ import { Toaster } from "react-hot-toast";
 import Footer from "./_components/UI/Footer";
 import Header from "./_components/UI/Header";
 import { TanstackProvider } from "./_components/Providers/TanstackProvider";
-import { AuthProvider } from "./_context/authContext";
+import { UserProvider } from "./_context/userContext";
 
 import "./_styles/globals.css";
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`min-h-screen`}>
-        <AuthProvider>
+        <UserProvider>
           <TanstackProvider>
             <Header />
             <div>{children}</div>
@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
               }}
             />
           </TanstackProvider>
-        </AuthProvider>
+        </UserProvider>
       </body>
     </html>
   );

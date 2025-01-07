@@ -2,9 +2,9 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import { supabase } from "../_utils/supabase";
 
-const AuthContext = createContext();
+const UserContext = createContext();
 
-function AuthProvider(props) {
+function UserProvider(props) {
   const [user, setUser] = useState(null);
 
   useEffect(function () {
@@ -13,7 +13,6 @@ function AuthProvider(props) {
       event,
       session
     ) {
-      console.log("Auth state changed:", event, session);
       setUser(session ? session.user : null);
     });
 
@@ -30,14 +29,14 @@ function AuthProvider(props) {
   }, []);
 
   return React.createElement(
-    AuthContext.Provider,
+    UserContext.Provider,
     { value: { user } },
     props.children
   );
 }
 
 function useAuth() {
-  return useContext(AuthContext);
+  return useContext(UserContext);
 }
 
-export { AuthProvider, useAuth };
+export { UserProvider, useAuth };
