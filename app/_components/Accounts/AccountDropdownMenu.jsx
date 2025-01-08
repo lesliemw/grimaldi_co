@@ -41,7 +41,7 @@ function AccountDropdownMenu() {
           </MenuItem>
           <MenuItem>
             <Link
-              href="/account"
+              href={user ? "/account" : "/user/login"}
               className="data-[active]:bg-gray-100 data-[active]:text-gray-900 text-gray-700 block px-4 py-2 text-sm"
             >
               Account Settings

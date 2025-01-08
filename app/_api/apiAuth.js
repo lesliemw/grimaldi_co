@@ -54,7 +54,7 @@ export async function login({ email, password }) {
   return data;
 }
 
-async function getCurrentUser() {
+export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
 
   if (!session?.session) return null;
@@ -63,14 +63,13 @@ async function getCurrentUser() {
 
   // Fetch data from your custom "user" table
   const { data, error } = await supabase
-    .from("user") // Replace "user" with your actual table name if different
-    .select("*") // Select specific fields if needed
+    .from("user")
+    .select("*")
     .eq("id", userId)
     .single();
 
   if (error) throw new Error(error.message);
-
-  return data; // This will return the user data from the custom table
+  return data;
 }
 
 export async function logout() {

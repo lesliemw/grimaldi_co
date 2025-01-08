@@ -1,7 +1,22 @@
 "use client";
+import { useUser } from "../../_api/useUser";
 import Link from "next/link";
 
 export default function AccountDetails() {
+  const { currentUser } = useUser();
+  const {
+    fname,
+    lname,
+    streetAddress,
+    city,
+    county,
+    country,
+    postalCode,
+    email,
+    vipStatus,
+    notificationsOrders,
+    notificationsOffers,
+  } = currentUser;
   return (
     <div className="mb-24 mt-10 p-8 font-themeFont flex justify-center w-full	">
       <div className="space-y-8">
@@ -20,7 +35,9 @@ export default function AccountDetails() {
                 Name
               </label>
               <div className="mt-2">
-                <h2>Leslie Kavanagh</h2>
+                <h2>
+                  {fname} {lname}
+                </h2>
               </div>
             </div>
 
@@ -33,7 +50,7 @@ export default function AccountDetails() {
                 Email address
               </label>
               <div className="mt-2">
-                <h4>l.marie1598@gmail.com</h4>
+                <h4>{email}</h4>
               </div>
             </div>
 
@@ -46,7 +63,7 @@ export default function AccountDetails() {
                 Street address
               </label>
               <div className="mt-2">
-                <h4>123 Easy Street</h4>
+                <h4>{streetAddress}</h4>
               </div>
             </div>
 
@@ -59,7 +76,7 @@ export default function AccountDetails() {
                 City
               </label>
               <div className="mt-2">
-                <h4>Portlaoise</h4>
+                <h4>{city}</h4>
               </div>
             </div>
 
@@ -72,7 +89,7 @@ export default function AccountDetails() {
                 County / Province
               </label>
               <div className="mt-2">
-                <h4>Laois</h4>
+                <h4>{county}</h4>
               </div>
             </div>
 
@@ -85,7 +102,7 @@ export default function AccountDetails() {
                 Postal code
               </label>
               <div className="mt-2">
-                <h4>A12 B34</h4>
+                <h4>{postalCode}</h4>
               </div>
             </div>
           </div>
@@ -98,7 +115,7 @@ export default function AccountDetails() {
               Country
             </label>
             <div className="mt-2">
-              <h4>Ireland</h4>
+              <h4>{country}</h4>
             </div>
           </div>
         </div>
@@ -125,7 +142,7 @@ export default function AccountDetails() {
                       name="orderDetails"
                       type="checkbox"
                       disabled
-                      checked
+                      checked={notificationsOrders}
                       className="cursor-not-allowed h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
                   </div>
@@ -149,6 +166,7 @@ export default function AccountDetails() {
                       name="offers"
                       type="checkbox"
                       disabled
+                      checked={notificationsOffers}
                       className="cursor-not-allowed h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
                   </div>

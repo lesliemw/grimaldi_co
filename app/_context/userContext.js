@@ -1,15 +1,18 @@
 "use client";
 import React, { useEffect, useState, createContext, useContext } from "react";
 import { supabase } from "../_utils/supabase";
+import { useUser } from "../_api/useUser";
+import { getCurrentUser } from "../_api/apiAuth";
 
 const UserContext = createContext();
 
 function UserProvider(props) {
   const [user, setUser] = useState(null);
+  const { data } = getCurrentUser();
 
   useEffect(function () {
     // Listen for auth state changes
-    var { data: subscription } = supabase.auth.onAuthStateChange(function (
+    const { data: subscription } = supabase.auth.onAuthStateChange(function (
       event,
       session
     ) {
