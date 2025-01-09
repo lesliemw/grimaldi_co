@@ -1,8 +1,10 @@
 "use client";
 import { useUser } from "../../_api/useUser";
+import { useAuth } from "../../_context/userContext";
 import Link from "next/link";
 
 export default function AccountDetails() {
+  const { user } = useAuth();
   const { currentUser } = useUser();
   const {
     fname,

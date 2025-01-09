@@ -6,12 +6,11 @@ import { getCurrentUser } from "../_api/apiAuth";
 
 const UserContext = createContext();
 
-function UserProvider(props) {
+function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const { data } = getCurrentUser();
 
   useEffect(function () {
-    // Listen for auth state changes
     const { data: subscription } = supabase.auth.onAuthStateChange(function (
       event,
       session
@@ -26,15 +25,15 @@ function UserProvider(props) {
       }
     });
 
-    return function cleanup() {
-      subscription.unsubscribe();
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
     };
   }, []);
 
-  return React.createElement(
-    UserContext.Provider,
-    { value: { user } },
-    props.children
+  return (
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
   );
 }
 

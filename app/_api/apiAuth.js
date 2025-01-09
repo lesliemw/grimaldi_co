@@ -55,20 +55,30 @@ export async function login({ email, password }) {
 }
 
 export async function getCurrentUser() {
-  const { data: session } = await supabase.auth.getSession();
+  // Fetch the current session
+  const { data: session, error: sessionError } =
+    await supabase.auth.getSession();
 
-  if (!session?.session) return null;
+  if (sessionError || !session?.session) {
+    console.log("No session found or an error occurred.");
+    return null;
+  }
 
   const userId = session.session.user.id;
 
-  // Fetch data from your custom "user" table
+  // Fetch user data from your custom "user" table
   const { data, error } = await supabase
     .from("user")
     .select("*")
     .eq("id", userId)
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error("Error fetching user data:", error.message);
+    throw new Error(error.message);
+  }
+
+  console.log("User data retrieved:", data);
   return data;
 }
 

@@ -12,8 +12,10 @@ import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
 import { useLogout } from "../../_api/useLogout";
 import { useUser } from "../../_api/useUser";
+import { useAuth } from "../../_context/userContext";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
+  const { user } = useAuth();
   const { currentUser } = useUser();
   const { fname, lname } = currentUser;
 
@@ -123,7 +125,7 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                       </button>
                     </Link>
 
-                    {user ? (
+                    {currentUser ? (
                       <button
                         className="flex ml-3 items-center"
                         onClick={logout}
