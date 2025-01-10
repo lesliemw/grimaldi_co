@@ -18,7 +18,6 @@ function UserProvider({ children }) {
       setUser(session ? session.user : null);
     });
 
-    // Check for existing session on mount
     supabase.auth.getSession().then(function (response) {
       if (response.data.session) {
         setUser(response.data.session.user);
@@ -26,8 +25,10 @@ function UserProvider({ children }) {
     });
 
     return () => {
-      if (subscription) {
+      if (subscription && typeof subscription.unsubscribe === "function") {
         subscription.unsubscribe();
+      } else if (typeof subscription === "function") {
+        subscription(); // Directly call the returned function if it's not an object
       }
     };
   }, []);

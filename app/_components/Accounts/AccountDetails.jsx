@@ -2,22 +2,32 @@
 import { useUser } from "../../_api/useUser";
 import { useAuth } from "../../_context/userContext";
 import Link from "next/link";
+import { Spinner } from "../UI/Spinner";
 
 export default function AccountDetails() {
   const { user } = useAuth();
   const { currentUser } = useUser();
+  if (!currentUser) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-gray-600 text-lg">
+          Loading your account details...
+        </div>
+      </div>
+    );
+  }
   const {
-    fname,
-    lname,
-    streetAddress,
-    city,
-    county,
-    country,
-    postalCode,
-    email,
-    vipStatus,
-    notificationsOrders,
-    notificationsOffers,
+    fname = "",
+    lname = "",
+    streetAddress = "",
+    city = "",
+    county = "",
+    country = "",
+    postalCode = "",
+    email = "",
+    vipStatus = false,
+    notificationsOrders = false,
+    notificationsOffers = false,
   } = currentUser;
   return (
     <div className="mb-24 mt-10 p-8 font-themeFont flex justify-center w-full	">

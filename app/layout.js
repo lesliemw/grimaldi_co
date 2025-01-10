@@ -18,8 +18,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`min-h-screen`}>
-        <UserProvider>
-          <TanstackProvider>
+        <TanstackProvider>
+          <UserProvider>
             <Header />
             <div>{children}</div>
             <Footer />
@@ -32,8 +32,8 @@ export default function RootLayout({ children }) {
                 },
               }}
             />
-          </TanstackProvider>
-        </UserProvider>
+          </UserProvider>
+        </TanstackProvider>
       </body>
     </html>
   );

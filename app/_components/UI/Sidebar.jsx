@@ -13,13 +13,24 @@ import Link from "next/link";
 import { useLogout } from "../../_api/useLogout";
 import { useUser } from "../../_api/useUser";
 import { useAuth } from "../../_context/userContext";
+import { Spinner } from "./Spinner";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
   const { user } = useAuth();
   const { currentUser } = useUser();
-  const { fname, lname } = currentUser;
+  const { fname, lname } = currentUser || {};
 
   const { logout, isLoading } = useLogout();
+
+  if (!currentUser) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-gray-600 text-lg">
+          Loading your account details...
+        </div>
+      </div>
+    );
+  }
 
   function handleClick() {
     isOpenSidebarToggle();
@@ -62,7 +73,7 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                       <div className="flex items-start justify-between">
                         <DialogTitle className="text-lg font-medium text-gray-900">
                           {currentUser
-                            ? `Welcome, ${fname || null} ${lname || null}`
+                            ? `Welcome, ${fname} ${lname}`
                             : "Welcome"}
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">

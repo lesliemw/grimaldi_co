@@ -78,7 +78,6 @@ export async function getCurrentUser() {
     throw new Error(error.message);
   }
 
-  console.log("User data retrieved:", data);
   return data;
 }
 
