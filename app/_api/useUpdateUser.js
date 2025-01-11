@@ -11,7 +11,7 @@ export function useUpdateUser() {
     mutationFn: updateCurrentUser,
     onSuccess: (response) => {
       if (!response || !response.user) {
-        toast.error("Failed to update user details.");
+        toast.error("Unable to update user details. Please try again later.");
         return;
       }
 

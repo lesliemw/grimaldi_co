@@ -12,25 +12,12 @@ import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
 import { useLogout } from "../../_api/useLogout";
 import { useUser } from "../../_api/useUser";
-import { useAuth } from "../../_context/userContext";
-import { Spinner } from "./Spinner";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
-  const { user } = useAuth();
   const { currentUser } = useUser();
   const { fname, lname } = currentUser || {};
 
   const { logout, isLoading } = useLogout();
-
-  if (!currentUser) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-gray-600 text-lg">
-          Loading your account details...
-        </div>
-      </div>
-    );
-  }
 
   function handleClick() {
     isOpenSidebarToggle();

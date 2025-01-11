@@ -286,7 +286,7 @@ export default function UpdateAccountDetails() {
                       id="notificationsOrders"
                       name="notificationsOrders"
                       type="checkbox"
-                      defaultValue={notificationsOrders}
+                      checked={updateDetails.notificationsOrders}
                       onChange={handleChange}
                       className="h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
@@ -310,7 +310,7 @@ export default function UpdateAccountDetails() {
                       id="notificationsOffers"
                       name="notificationsOffers"
                       type="checkbox"
-                      defaultValue={notificationsOffers}
+                      checked={updateDetails.notificationsOffers}
                       onChange={handleChange}
                       className="h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />

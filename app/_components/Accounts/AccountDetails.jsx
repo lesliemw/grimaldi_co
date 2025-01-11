@@ -3,6 +3,7 @@ import { useUser } from "../../_api/useUser";
 import { useAuth } from "../../_context/userContext";
 import Link from "next/link";
 import { Spinner } from "../UI/Spinner";
+import { IoDiamond } from "react-icons/io5";
 
 export default function AccountDetails() {
   const { user } = useAuth();
@@ -28,7 +29,7 @@ export default function AccountDetails() {
     vipStatus = false,
     notificationsOrders = false,
     notificationsOffers = false,
-  } = currentUser;
+  } = currentUser || {};
   return (
     <div className="mb-24 mt-10 p-8 font-themeFont flex justify-center w-full	">
       <div className="space-y-8">
@@ -46,7 +47,7 @@ export default function AccountDetails() {
               >
                 Name
               </label>
-              <div className="mt-2">
+              <div className="mt-2 flex">
                 <h2>
                   {fname} {lname}
                 </h2>
@@ -118,17 +119,31 @@ export default function AccountDetails() {
               </div>
             </div>
           </div>
-          <div className="sm:col-span-3 mt-2">
-            <label
-              htmlFor="country"
-              id="country"
-              className="block text-xs font-medium leading-6 text-gray-900"
-            >
-              Country
-            </label>
-            <div className="mt-2">
-              <h4>{country}</h4>
+          <div className="flex gap-44 ">
+            <div className="sm:col-span-3 mt-2">
+              <label
+                htmlFor="country"
+                id="country"
+                className="block text-xs font-medium leading-6 text-gray-900"
+              >
+                Country
+              </label>
+              <div className="mt-2">
+                <h4>{country}</h4>
+              </div>
             </div>
+            {vipStatus && (
+              <div className="sm:col-span-3 mt-2">
+                <label className="block text-xs font-medium leading-6 text-gray-900">
+                  VIP Status
+                </label>
+                <div className="mt-2">
+                  <h4 className="flex gap-4 items-center">
+                    <IoDiamond /> VIP Member since 2025
+                  </h4>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
