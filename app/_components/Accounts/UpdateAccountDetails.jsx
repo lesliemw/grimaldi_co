@@ -1,10 +1,78 @@
 "use client";
 
+import { useState } from "react";
+import { useUser } from "../../_api/useUser";
+import { useAuth } from "../../_context/userContext";
 import Link from "next/link";
+import { useUpdateUser } from "../../_api/useUpdateUser";
 
 export default function UpdateAccountDetails() {
+  const { currentUser } = useUser();
+  const { updateUser, isUpdating } = useUpdateUser();
+  if (!currentUser) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-gray-600 text-lg">
+          Loading your account details...
+        </div>
+      </div>
+    );
+  }
+  const {
+    fname = "",
+    lname = "",
+    streetAddress = "",
+    city = "",
+    county = "",
+    country = "",
+    postalCode = "",
+    email = "",
+    vipStatus = false,
+    notificationsOrders = false,
+    notificationsOffers = false,
+  } = currentUser;
+
+  const [updateDetails, setUpdateDetails] = useState({
+    fname: currentUser.fname,
+    lname: currentUser.lname,
+    streetAddress: currentUser.streetAddress,
+    city: currentUser.city,
+    county: currentUser.county,
+    country: currentUser.country,
+    postalCode: currentUser.postalCode,
+    notificationsOffers: currentUser.notificationsOffers,
+    notificationsOrders: currentUser.notificationsOrders,
+  });
+
+  function handleChange(e) {
+    const { name, value, type, checked } = e.target;
+    setUpdateDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  }
+  function handleUpdate(e) {
+    e.preventDefault();
+
+    updateUser({
+      fname: updateDetails.fname,
+      lname: updateDetails.lname,
+      vipStatus: updateDetails.vipStatus,
+      notificationsOrders: updateDetails.notificationsOrders,
+      notificationsOffers: updateDetails.notificationsOffers,
+      streetAddress: updateDetails.streetAddress,
+      city: updateDetails.city,
+      county: updateDetails.county,
+      postalCode: updateDetails.postalCode,
+      country: updateDetails.country,
+    });
+  }
+
   return (
-    <form className="m-16 lg:mx-60 lg:mt-20 place-center font-themeFont w-auto">
+    <form
+      className="m-16 lg:mx-60 lg:mt-20 place-center font-themeFont w-auto"
+      onSubmit={handleUpdate}
+    >
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -24,8 +92,9 @@ export default function UpdateAccountDetails() {
                   type="text"
                   name="fname"
                   id="fname"
-                  defaultValue="Leslie"
+                  defaultValue={fname}
                   autoComplete="given-name"
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-pointer px-2"
                 />
               </div>
@@ -43,8 +112,9 @@ export default function UpdateAccountDetails() {
                   type="text"
                   name="lname"
                   id="lname"
-                  defaultValue="Kavanagh"
+                  defaultValue={lname}
                   autoComplete="family-name"
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-pointer px-2"
                 />
               </div>
@@ -62,7 +132,7 @@ export default function UpdateAccountDetails() {
                   id="email"
                   name="email"
                   type="email"
-                  defaultValue="l.marie1598@gmail.com"
+                  defaultValue={email}
                   disabled
                   autoComplete="email"
                   className="disabled:ring-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
@@ -82,8 +152,9 @@ export default function UpdateAccountDetails() {
                   type="text"
                   name="streetAddress"
                   id="streetAddress"
-                  defaultValue="123 Easy Street"
+                  defaultValue={streetAddress}
                   autoComplete="street-address"
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-pointer px-2"
                 />
               </div>
@@ -101,8 +172,9 @@ export default function UpdateAccountDetails() {
                   type="text"
                   name="city"
                   id="city"
-                  defaultValue="Portlaoise"
+                  defaultValue={city}
                   autoComplete="address-level2"
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-pointer px-2"
                 />
               </div>
@@ -119,9 +191,10 @@ export default function UpdateAccountDetails() {
                 <input
                   type="text"
                   name="county"
-                  defaultValue="Laois"
+                  defaultValue={county}
                   id="county"
                   autoComplete="address-level1"
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-pointer px-2"
                 />
               </div>
@@ -139,8 +212,9 @@ export default function UpdateAccountDetails() {
                   type="text"
                   name="postalCode"
                   id="postalCode"
-                  defaultValue="A12 B34"
+                  defaultValue={postalCode}
                   autoComplete="postal-code"
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-pointer px-2"
                 />
               </div>
@@ -157,8 +231,9 @@ export default function UpdateAccountDetails() {
               <select
                 id="country"
                 name="country"
-                defaultValue="Ireland"
+                defaultValue={country}
                 autoComplete="country-name"
+                onChange={handleChange}
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6 cursor-pointer"
               >
                 <option name="Ireland" value="Ireland">
@@ -208,15 +283,17 @@ export default function UpdateAccountDetails() {
                 <div className="relative flex gap-x-3">
                   <div className="flex h-6 items-center">
                     <input
-                      id="orderDetails"
-                      name="orderDetails"
+                      id="notificationsOrders"
+                      name="notificationsOrders"
                       type="checkbox"
+                      defaultValue={notificationsOrders}
+                      onChange={handleChange}
                       className="h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
                   </div>
                   <div className="text-sm leading-6">
                     <label
-                      htmlFor="orderDetails"
+                      htmlFor="notificationsOrders"
                       className="font-medium text-gray-900"
                     >
                       Order Details
@@ -230,9 +307,11 @@ export default function UpdateAccountDetails() {
                 <div className="relative flex gap-x-3">
                   <div className="flex h-6 items-center">
                     <input
-                      id="offers"
-                      name="offers"
+                      id="notificationsOffers"
+                      name="notificationsOffers"
                       type="checkbox"
+                      defaultValue={notificationsOffers}
+                      onChange={handleChange}
                       className="h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500"
                     />
                   </div>
@@ -260,14 +339,14 @@ export default function UpdateAccountDetails() {
                 Cancel
               </button>
             </Link>
-            <Link href="/account">
-              <button
-                type="submit"
-                className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer"
-              >
-                Save
-              </button>
-            </Link>
+
+            <button
+              type="submit"
+              disabled={isUpdating}
+              className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>

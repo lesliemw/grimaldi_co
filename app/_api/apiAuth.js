@@ -55,7 +55,6 @@ export async function login({ email, password }) {
 }
 
 export async function getCurrentUser() {
-  // Fetch the current session
   const { data: session, error: sessionError } =
     await supabase.auth.getSession();
 
@@ -65,7 +64,6 @@ export async function getCurrentUser() {
   }
 
   const userId = session.session.user.id;
-
   // Fetch user data from your custom "user" table
   const { data, error } = await supabase
     .from("user")
@@ -87,33 +85,64 @@ export async function logout() {
 }
 
 export async function updateCurrentUser({
-  password,
   fname,
   lname,
   vipStatus,
   notificationsOrders,
+  notificationsOffers,
   streetAddress,
   city,
   county,
   postalCode,
   country,
 }) {
-  //1. Update data
-  let updateData;
-  if (password) updateData = { password };
-  if (fname) updateData = { data: { fname } };
-  if (lname) updateData = { data: { lname } };
-  if (vipStatus) updateData = { data: { vipStatus } };
-  if (notificationsOrders) updateData = { data: { notificationsOrders } };
-  if (streetAddress) updateData = { data: { streetAddress } };
-  if (city) updateData = { data: { city } };
-  if (county) updateData = { data: { county } };
-  if (postalCode) updateData = { data: { postalCode } };
-  if (country) updateData = { data: { country } };
+  const { data: session, error: sessionError } =
+    await supabase.auth.getSession();
 
-  const { data, error } = await supabase.auth.updateUser(updateData);
+  if (sessionError || !session?.session) {
+    console.log("No session found or an error occurred.");
+    return null;
+  }
 
-  if (error) throw new Error(error.message);
+  const userId = session.session.user.id;
 
-  return updatedUser;
+  // Fetch the current user data
+  const { data: currentUserData, error: fetchError } = await supabase
+    .from("user") // Replace "user" with your table name
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (fetchError) {
+    throw new Error(fetchError.message);
+  }
+
+  // Merge the current data with the updated fields
+  const updateData = {
+    ...currentUserData,
+    ...(fname !== undefined && { fname }),
+    ...(lname !== undefined && { lname }),
+    ...(vipStatus !== undefined && { vipStatus }),
+    ...(notificationsOrders !== undefined && { notificationsOrders }),
+    ...(notificationsOffers !== undefined && { notificationsOffers }),
+    ...(streetAddress !== undefined && { streetAddress }),
+    ...(city !== undefined && { city }),
+    ...(county !== undefined && { county }),
+    ...(postalCode !== undefined && { postalCode }),
+    ...(country !== undefined && { country }),
+  };
+
+  // Update the user data in Supabase
+  const { data: updatedUser, error: updateError } = await supabase
+    .from("user")
+    .update(updateData)
+    .eq("id", userId)
+    .select();
+
+  if (updateError) {
+    throw new Error(updateError.message);
+  }
+
+  // Return the updated user data
+  return { user: updatedUser[0] };
 }
