@@ -20,21 +20,19 @@
 <li>local storage</li>
 <li>payment options</li>
 <li>✅database for account storage</li>
-<li>router</li>
-<li>server</li>
 <li>✅context for login in info as it will be used throughout</li>
 </ul>
 <h3>ui</h3>
 <ul>
-<li>sidebar</li>
+<li>✅sidebar</li>
 <li>product cards</li>
-<li>account details page</li>
+<li>✅account details page</li>
 <li>checkout page</li>
 <li>loading ui</li>
 <li>✅404 page</li>
 <li>successful payment page</li>
 <li>dropdown menu for page order</li>
 <li>pagination</li>
-<li>dropdown menu for account (account settings, sign in/out)</li>
+<li>✅dropdown menu for account (account settings, sign in/out)</li>
 </ul>
 # ecommerce
