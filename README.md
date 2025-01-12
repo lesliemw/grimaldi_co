@@ -11,8 +11,6 @@
 
 </ul>
 
-//notes
-
 <h3>features:</h3>
 <ul>
 <li>cart</li>
