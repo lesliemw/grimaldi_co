@@ -6,36 +6,35 @@
 <li>tailwindcss</li>
 <li>react-icons</li>
 <li>Context</li>
-<li>Axios</li>
-<li>nodejs</li>
-<li>bcrypt</li>
-<li>Stripe</li>
-<li>NextAuth</li>
+<li>Supabase</li>
+<li>SupabaseAuth</li>
 
 </ul>
 
 //notes
 
 <h3>features:</h3>
--cart
--authentication
--local storage
--payment options
--database for account storage
--router
--server
--context for login in info as it will be used throughout
-
+<ul>
+<li>cart</li>
+<li>✅authentication</li>
+<li>local storage</li>
+<li>payment options</li>
+<li>✅database for account storage</li>
+<li>router</li>
+<li>server</li>
+<li>✅context for login in info as it will be used throughout</li>
+</ul>
 <h3>ui</h3>
--sidebar
--product cards
--account details page
--checkout page
--loading ui
--✅404 page
--successful payment page
--dropdown menu for page order
--pagination
--dropdown menu for account (account settings, sign in/out)
-
+<ul>
+<li>sidebar</li>
+<li>product cards</li>
+<li>account details page</li>
+<li>checkout page</li>
+<li>loading ui</li>
+<li>✅404 page</li>
+<li>successful payment page</li>
+<li>dropdown menu for page order</li>
+<li>pagination</li>
+<li>dropdown menu for account (account settings, sign in/out)</li>
+</ul>
 # ecommerce
