@@ -84,18 +84,7 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
-export async function updateCurrentUser({
-  fname,
-  lname,
-  vipStatus,
-  notificationsOrders,
-  notificationsOffers,
-  streetAddress,
-  city,
-  county,
-  postalCode,
-  country,
-}) {
+export async function updateCurrentUser(updateFields) {
   const { data: session, error: sessionError } =
     await supabase.auth.getSession();
 
@@ -106,43 +95,17 @@ export async function updateCurrentUser({
 
   const userId = session.session.user.id;
 
-  // Fetch the current user data
-  const { data: currentUserData, error: fetchError } = await supabase
-    .from("user") // Replace "user" with your table name
-    .select("*")
-    .eq("id", userId)
-    .single();
-
-  if (fetchError) {
-    throw new Error(fetchError.message);
-  }
-
-  // Merge the current data with the updated fields
-  const updateData = {
-    ...currentUserData,
-    ...(fname !== undefined && { fname }),
-    ...(lname !== undefined && { lname }),
-    ...(vipStatus !== undefined && { vipStatus }),
-    ...(notificationsOrders !== undefined && { notificationsOrders }),
-    ...(notificationsOffers !== undefined && { notificationsOffers }),
-    ...(streetAddress !== undefined && { streetAddress }),
-    ...(city !== undefined && { city }),
-    ...(county !== undefined && { county }),
-    ...(postalCode !== undefined && { postalCode }),
-    ...(country !== undefined && { country }),
-  };
-
-  // Update the user data in Supabase
+  // Update only the provided fields in Supabase
   const { data: updatedUser, error: updateError } = await supabase
     .from("user")
-    .update(updateData)
+    .update(updateFields)
     .eq("id", userId)
-    .select();
+    .select()
+    .single(); // Fetch the updated user data directly
 
   if (updateError) {
     throw new Error(updateError.message);
   }
 
-  // Return the updated user data
-  return { user: updatedUser[0] };
+  return { user: updatedUser };
 }

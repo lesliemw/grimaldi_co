@@ -11,7 +11,7 @@ function Footer() {
           <p className="text-gray-700 text-xs pl-px">
             Get all of the latest offers straight to your inbox.
           </p>
-          <form action="#" className="mt-2">
+          <form className="mt-2">
             <div className="flex items-center">
               <input
                 type="email"
