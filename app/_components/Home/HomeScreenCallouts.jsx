@@ -41,23 +41,28 @@ const callouts = [
 
 function HomeScreenCallouts() {
   return (
-    <div className="bg-gray-100 font-themeFont ">
-      <div className=" mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:py-32">
-        <h2 className="text-2xl font-bold text-gray-900">Shop by Category</h2>
-        <div className="container mx-auto px-8">
-          <div className="mt-6  grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+    <div className="bg-gray-100 font-themeFont">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:py-32">
+        <h2 className="text-2xl font-bold text-gray-900 text-center sm:text-left">
+          Shop by Category
+        </h2>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mt-6 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3  xl:gap-x-8">
             {callouts.map((callout) => (
-              <div key={callout.name} className="group relative">
-                <div className="relative flex-1 h-96 w-full overflow-hidden bg-white">
+              <div
+                key={callout.name}
+                className="group relative flex flex-col items-center text-center sm:items-start sm:text-left cursor-pointer	"
+              >
+                <div className="relative h-64 w-full sm:h-72 md:h-80 overflow-hidden bg-white rounded-lg shadow-md">
                   <Image
                     src={callout.image}
                     alt={callout.alt}
                     fill
-                    className="aspect-square"
+                    className="object-scale-down object-center transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="mt-6 text-sm text-gray-500">
-                  <a href={callout.href}>
+                <h3 className="mt-4 text-sm text-gray-500">
+                  <a href={callout.href} className="hover:underline">
                     <span className="absolute inset-0" />
                     {callout.name}
                   </a>

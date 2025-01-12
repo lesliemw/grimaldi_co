@@ -1,4 +1,4 @@
-// import CartItem from "./CartItem";
+import CartItem from "./CartItem";
 
 import { Fragment } from "react";
 import {
@@ -10,7 +10,7 @@ import {
 } from "@headlessui/react";
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
-// import fakeData from "@components/fakeStore";
+import fakeData from "../../_lib/fakeStore";
 // import { useSelector } from "react-redux";
 
 export default function CartPopper({
@@ -65,14 +65,14 @@ export default function CartPopper({
                         </div>
                       </div>
 
-                      {/* <div className="mt-8">
-                        {cart?.length ? (
+                      <div className="mt-8">
+                        {fakeData?.length ? (
                           <div className="flow-root">
                             <ul
                               role="list"
                               className="-my-6 divide-y divide-gray-200"
                             >
-                              {cart?.map((item, i) => (
+                              {fakeData?.map((item, i) => (
                                 <CartItem
                                   key={item._id || i}
                                   item={item}
@@ -96,7 +96,7 @@ export default function CartPopper({
                             </p>
                           </>
                         )}
-                      </div> */}
+                      </div>
                     </div>
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">

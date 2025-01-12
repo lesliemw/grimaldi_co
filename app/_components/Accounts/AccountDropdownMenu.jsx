@@ -9,10 +9,13 @@ function AccountDropdownMenu() {
   const { user } = useAuth();
   const { logout, isLoading } = useLogout();
   return (
-    <Menu as="div" className="relative inline-block font-extralight text-left">
+    <Menu
+      as="div"
+      className="relative ml-4 inline-block font-extralight justify-end"
+    >
       <div>
-        <MenuButton className="w-full font-themeFont justify-center gap-x-1.5 rounded-md bg-white md:px-3 py-2 text-gray-700 ring-inset flex md:p-2 items-center">
-          <GoPerson className="m-2 text-xl md:text-md lg:text-2xl" />
+        <MenuButton className="w-full font-themeFont justify-end gap-x-1.5 rounded-md bg-white md:px-3 py-2 text-gray-700 ring-inset flex  items-center">
+          <GoPerson className=" text-xl md:text-md lg:text-2xl" />
           <span className="invisible sm:visible">Account</span>
         </MenuButton>
       </div>

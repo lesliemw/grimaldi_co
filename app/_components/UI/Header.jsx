@@ -23,13 +23,14 @@ function Header() {
   }
 
   return (
-    <header className="grid grid-cols-3 w-full lg:p-3 p-1  items-center font-themeFont font-extralight bg-white fixed top-0 z-10 justify-items-center">
-      <div className="flex items-center ml-5 cursor-pointer ">
+    <header className="grid grid-cols-3 w-full lg:px-6 px-4 py-2 items-center font-themeFont font-extralight bg-white fixed top-0 z-10 justify-items-center shadow-sm">
+      {/* Left Section: Hamburger Menu & Search Bar */}
+      <div className="flex items-center gap-2 w-full">
         <RxHamburgerMenu
-          className="m-2 text-sm md:text-md lg:text-2xl"
+          className="text-lg sm:text-xl lg:text-2xl"
           onClick={isOpenSidebarToggle}
         />
-        <span>Menu</span>
+        <span className="hidden sm:inline">Menu</span>
         {isOpenSidebar && (
           <Sidebar
             isOpenSidebar={isOpenSidebar}
@@ -37,23 +38,31 @@ function Header() {
             isOpenSidebarToggle={isOpenSidebarToggle}
           />
         )}
-        <SearchBar />
+        <div>
+          <SearchBar />
+        </div>
       </div>
-      <div>
+
+      {/* Center Section: Branding */}
+      <div className="justify-self-center ">
         <Link href="/">
           <img
-            className="lg:w-80 w-52  max-h-24 "
+            className="lg:w-64 w-44 max-h-16"
             src="/fullBranding.png"
-            alt=""
+            alt="Brand Logo"
           />
         </Link>
       </div>
-      <div className="flex sm:mr-5 ">
-        <AccountDropdownMenu />
 
-        <button onClick={isOpenCartToggle} className="flex sm:p-2 items-center">
-          <IoBagHandleOutline className="md:m-2 text-xl md:text-md lg:text-2xl" />
-          <span className="invisible sm:visible">Cart</span>
+      {/* Right Section: Account & Cart */}
+      <div className="flex items-center	gap-4">
+        <AccountDropdownMenu />
+        <button
+          onClick={isOpenCartToggle}
+          className="flex items-center  text-gray-700 hover:text-gray-900"
+        >
+          <IoBagHandleOutline className="text-xl sm:text-2xl" />
+          <span className="hidden sm:inline ml-2">Cart</span>
         </button>
         {isOpenCart && (
           <CartPopper
