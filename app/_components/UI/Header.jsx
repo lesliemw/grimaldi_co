@@ -25,7 +25,7 @@ function Header() {
   return (
     <header className="grid grid-cols-3 w-full lg:px-6 px-4 py-2 items-center font-themeFont font-extralight bg-white fixed top-0 z-10 justify-items-center shadow-sm">
       {/* Left Section: Hamburger Menu & Search Bar */}
-      <div className="flex items-center gap-2 w-full">
+      <div className="flex items-center gap-2 w-full cursor-pointer">
         <RxHamburgerMenu
           className="text-lg sm:text-xl lg:text-2xl"
           onClick={isOpenSidebarToggle}
