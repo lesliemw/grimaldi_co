@@ -2,7 +2,7 @@
 import Image from "next/image";
 import AddToCartButton from "../ui/AddToCartButton";
 import HeartButton from "../ui/HeartButton";
-import QuantityCounter from "@components/ui/QuantityCounter";
+import QuantityCounter from "../UI/QuantityCounter";
 import { useState } from "react";
 
 function ProductDetails({ product }) {

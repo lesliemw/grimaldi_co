@@ -1,7 +1,7 @@
 "use client";
 
-import ProductDetails from "@components/products/ProductDetails";
-import axios from "axios";
+import ProductDetails from "../../_components/*Products/ProductDetails";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 
 function ProductIdPage({ params: { productId } }) {
