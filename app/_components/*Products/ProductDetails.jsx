@@ -4,10 +4,12 @@ import AddToCartButton from "../ui/AddToCartButton";
 import HeartButton from "../ui/HeartButton";
 import QuantityCounter from "../UI/QuantityCounter";
 import { useState } from "react";
+import fakeData from "../../_lib/fakeStore";
 
-function ProductDetails({ product }) {
+function ProductDetails() {
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
+  const product = fakeData[0];
 
   function handleIncrement() {
     setQty(qty + 1);
@@ -25,8 +27,8 @@ function ProductDetails({ product }) {
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <Image
-              alt={product?.alt}
-              src={product?.src}
+              alt={product?.name}
+              src={product?.image}
               height={500}
               width={500}
               className="lg:w-1/2 w-full object-cover object-center"
