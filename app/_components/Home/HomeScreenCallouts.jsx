@@ -32,8 +32,8 @@ const callouts = [
     alt: "callout",
   },
   {
-    name: "Makeup",
-    description: "Because you are worth it.",
+    name: "Toiletries",
+    description: "Look good. Feel good. Smell good.",
     image: "/jacket.jpg",
     alt: "callout",
   },

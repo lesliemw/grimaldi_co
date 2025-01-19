@@ -109,7 +109,6 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                         <div className="my-3">
                           <ul>
                             <li>Jewelry</li>
-                            <li>Scarves</li>
                             <li>Homewares</li>
                             <li>Toiletries</li>
                           </ul>
