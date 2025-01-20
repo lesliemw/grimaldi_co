@@ -28,7 +28,7 @@ function UserProvider({ children }) {
       if (subscription && typeof subscription.unsubscribe === "function") {
         subscription.unsubscribe();
       } else if (typeof subscription === "function") {
-        subscription(); // Directly call the returned function if it's not an object
+        subscription();
       }
     };
   }, []);

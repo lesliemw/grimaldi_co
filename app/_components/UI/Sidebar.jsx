@@ -5,22 +5,28 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
 import { useLogout } from "../../_api/useLogout";
 import { useUser } from "../../_api/useUser";
+import { useProducts } from "../../_api/supabaseApi/useProducts";
+import { ProductsContext } from "../../_context/productsContext";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
   const { currentUser } = useUser();
   const { fname, lname } = currentUser || {};
-
   const { logout, isLoading } = useLogout();
+  const { products } = useContext(ProductsContext);
 
   function handleClick() {
     isOpenSidebarToggle();
+  }
+
+  function handleProductsClick() {
+    console.log(products);
   }
 
   return (
@@ -81,7 +87,9 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                         </DialogTitle>
                         <div className="my-3">
                           <ul>
-                            <li>Tops</li>
+                            <Link href="" onClick={handleProductsClick}>
+                              <li>Tops</li>
+                            </Link>
                             <li>Trousers</li>
                             <li>Dresses</li>
                             <li>Handbags</li>

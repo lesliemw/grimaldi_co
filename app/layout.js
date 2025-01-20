@@ -3,6 +3,7 @@ import Footer from "./_components/UI/Footer";
 import Header from "./_components/UI/Header";
 import { TanstackProvider } from "./_components/Providers/TanstackProvider";
 import { UserProvider } from "./_context/userContext";
+import { ProductsProvider } from "./_context/productsContext";
 
 import "./_styles/globals.css";
 
@@ -19,20 +20,22 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`min-h-screen`}>
         <TanstackProvider>
-          <UserProvider>
-            <Header />
-            <div>{children}</div>
-            <Footer />
-            <Toaster
-              position="top-right"
-              reverseOrder={false}
-              toastOptions={{
-                style: {
-                  textAlign: "center",
-                },
-              }}
-            />
-          </UserProvider>
+          <ProductsProvider>
+            <UserProvider>
+              <Header />
+              <div>{children}</div>
+              <Footer />
+              <Toaster
+                position="top-right"
+                reverseOrder={false}
+                toastOptions={{
+                  style: {
+                    textAlign: "center",
+                  },
+                }}
+              />
+            </UserProvider>
+          </ProductsProvider>
         </TanstackProvider>
       </body>
     </html>
