@@ -1,20 +1,20 @@
-const { supabase } = require("../../_utils/supabase");
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
+import { fetchProducts } from "../supabaseApi/apiProducts";
 
-export async function useProducts() {
-  const { data: products, error } = await supabase.from("product").select(`
-    *, 
-    product_item(
-      *, 
-      product_variation(*)
-    ), 
-    product_category(*), 
-    product_image(*)
-  `);
+export function useProducts() {
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+    onError: (err) => {
+      console.error("Error fetching products:", err);
+      toast.error("Failed to load your products. Please try again.");
+    },
+  });
 
-  if (error) {
-    console.error("Error fetching products:", error);
-    return null;
-  }
-
-  return products;
+  return { products, isLoading, error };
 }

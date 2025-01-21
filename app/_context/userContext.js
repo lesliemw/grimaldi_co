@@ -4,9 +4,9 @@ import { supabase } from "../_utils/supabase";
 import { useUser } from "../_api/useUser";
 import { getCurrentUser } from "../_api/apiAuth";
 
-const UserContext = createContext();
+const AuthContext = createContext();
 
-function UserProvider({ children }) {
+function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const { data } = getCurrentUser();
 
@@ -34,12 +34,12 @@ function UserProvider({ children }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
 }
 
 function useAuth() {
-  return useContext(UserContext);
+  return useContext(AuthContext);
 }
 
-export { UserProvider, useAuth };
+export { AuthProvider, useAuth };

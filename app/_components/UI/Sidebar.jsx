@@ -13,13 +13,12 @@ import Link from "next/link";
 import { useLogout } from "../../_api/useLogout";
 import { useUser } from "../../_api/useUser";
 import { useProducts } from "../../_api/supabaseApi/useProducts";
-import { ProductsContext } from "../../_context/productsContext";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
   const { currentUser } = useUser();
   const { fname, lname } = currentUser || {};
   const { logout, isLoading } = useLogout();
-  const { products } = useContext(ProductsContext);
+  const { products } = useProducts();
 
   function handleClick() {
     isOpenSidebarToggle();
