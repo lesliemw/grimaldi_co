@@ -24,10 +24,6 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
     isOpenSidebarToggle();
   }
 
-  function handleProductsClick() {
-    console.log(products);
-  }
-
   return (
     <Transition
       show={isOpenSidebar}
@@ -86,14 +82,42 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                         </DialogTitle>
                         <div className="my-3">
                           <ul>
-                            <Link href="" onClick={handleProductsClick}>
+                            <Link
+                              href="/products/womens_tops"
+                              onClick={handleClick}
+                            >
                               <li>Tops</li>
                             </Link>
-                            <li>Trousers</li>
-                            <li>Dresses</li>
-                            <li>Handbags</li>
-                            <li>Jackets</li>
-                            <li>Shoes</li>
+                            <Link
+                              href="/products/womens_trousers"
+                              onClick={handleClick}
+                            >
+                              <li>Trousers</li>
+                            </Link>
+                            <Link
+                              href="/products/womens_dresses"
+                              onClick={handleClick}
+                            >
+                              <li>Dresses</li>
+                            </Link>
+                            <Link
+                              href="/products/womens_handbags"
+                              onClick={handleClick}
+                            >
+                              <li>Handbags</li>
+                            </Link>
+                            <Link
+                              href="/products/womens_jackets"
+                              onClick={handleClick}
+                            >
+                              <li>Jackets</li>
+                            </Link>
+                            <Link
+                              href="/products/womens_shoes"
+                              onClick={handleClick}
+                            >
+                              <li>Shoes</li>
+                            </Link>
                           </ul>
                         </div>
 

@@ -13,7 +13,7 @@ function ProductCard({ src, name, description, price, productId }) {
               src={src}
               alt={name}
               fill
-              className="h-full w-full object-fill object-center lg:h-full lg:w-full"
+              className="h-full w-full object-scale-down  object-center lg:h-full lg:w-full"
             />
           </div>
           <div className="mt-4 flex justify-between">

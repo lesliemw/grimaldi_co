@@ -1,14 +1,12 @@
 "use client";
-import ProductCard from "./ProductCard";
 import { useFilterProductsByCategory } from "../../_api/supabaseApi/useFilterProducts";
+import Loading from "../../loading";
+import HeartButton from "../UI/HeartButton";
+import AddToCartButton from "../UI/AddToCartButton";
 
 function ProductsMap({ category_id }) {
   const { filteredProductsByCategory, isLoading, error } =
     useFilterProductsByCategory(category_id) || {};
-
-  if (isLoading) {
-    return <p>Loading products...</p>;
-  }
 
   if (error) {
     return <p>Failed to load products. Please try again later.</p>;
@@ -19,48 +17,63 @@ function ProductsMap({ category_id }) {
   }
 
   return (
-    <div className="bg-white  font-themeFont">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-          {filteredProductsByCategory.category_name}
-        </h2>
-        <div className="grid grid-rows-1 w-auto  content-center p-3 ">
-          <div className="mt-6 grid grid-cols-1 gap-x-16  gap-y-20 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
-            {filteredProductsByCategory?.map((product, i) => (
-              <div
-                key={product.product_id || i}
-                className="product-card-container"
-              >
-                {/* Main Product Info */}
-                <ProductCard
-                  productId={product.product_id}
-                  description={product.product_description}
-                  alt={product.product_name || "Product"}
-                  name={product.product_name}
-                  price={
-                    product.product_item?.[0]?.sale_price ||
-                    product.product_item?.[0]?.original_price
-                  }
-                  src={product.product_image?.[0]?.image_filename} // Display the first image as the main image
-                />
+    <div className="bg-white font-themeFont">
+      <div className=" px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="grid grid-rows-1 p-3 ">
+          <div className=" grid grid-cols-1 mx-auto gap-x-16 gap-y-20 lg:grid-cols-3 xl:gap-x-24 ">
+            {isLoading ? (
+              <Loading />
+            ) : (
+              filteredProductsByCategory?.map((product, i) => (
+                <div
+                  key={product.product_id || i}
+                  className=" grid grid-cols-1 items-center"
+                >
+                  <div className="col-span-1">
+                    <img
+                      src={product.product_image?.[0]?.image_filename}
+                      alt={product.product_name}
+                      className="w-full h-96 object-scale-down rounded-lg "
+                    />
+                  </div>
 
-                {/* Additional Product Images */}
-                {product.product_image?.length > 1 && (
-                  <div className="mt-4 flex space-x-2">
-                    {product.product_image.map((image, index) => (
+                  <div className="flex flex-row col-span-1 mt-2 items-center ">
+                    {product.product_image?.slice(1).map((image, index) => (
                       <img
                         key={image.image_id || index}
                         src={image.image_filename}
-                        alt={`${product.product_name || "Product"} image ${
+                        alt={`${product.product_name || "Color option"} ${
                           index + 1
                         }`}
-                        className="w-20 h-20 object-cover rounded-md"
+                        className="w-28 h-20 object-cover rounded-md cursor-pointer border"
                       />
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                  <div className=" col-span-1 mt-4">
+                    <h3 className="text-2xl font-bold">
+                      {product.product_name}
+                    </h3>
+                    <p className="text-gray-500 mt-2">
+                      {product.product_description}
+                    </p>
+                    <div className="flex justify-between mt-6 items-center">
+                      <div>
+                        <p className="text-2xl font-semibold">
+                          €
+                          {product.product_item?.[0]?.sale_price ||
+                            product.product_item?.[0]?.original_price ||
+                            "N/A"}
+                        </p>
+                      </div>
+                      <div className="flex gap-6">
+                        <HeartButton />
+                        <AddToCartButton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
