@@ -8,12 +8,11 @@ function ProductCard({ src, name, description, price, productId }) {
     <div>
       <Link href={`/products/${productId}`}>
         <div className="relative ">
-          <div className=" w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-80 ">
+          <div className=" w-full relative overflow-hidden rounded-md group-hover:opacity-75 lg:h-80 ">
             <Image
               src={src}
               alt={name}
-              height={500}
-              width={500}
+              fill
               className="h-full w-full object-fill object-center lg:h-full lg:w-full"
             />
           </div>

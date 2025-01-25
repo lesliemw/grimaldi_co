@@ -7,7 +7,7 @@ function HeartButton() {
 
   return (
     <button
-      className={`flex items-center  rounded-md sm:text-3xl  text-5xl  hover:text-red-400 ${
+      className={`flex items-center  rounded-md sm:text-3xl  text-xl  hover:text-red-400 ${
         liked && "text-red-400"
       } font-bold`}
       onClick={() => setIsLiked(!liked)}
