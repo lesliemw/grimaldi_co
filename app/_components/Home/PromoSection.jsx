@@ -32,6 +32,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
@@ -41,6 +42,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -52,6 +54,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
@@ -61,6 +64,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
@@ -70,6 +74,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -81,6 +86,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
@@ -90,6 +96,7 @@ export default function PromoSection() {
                           width={500}
                           height={500}
                           className="h-full w-full object-cover object-center"
+                          loading="lazy"
                         />
                       </div>
                     </div>

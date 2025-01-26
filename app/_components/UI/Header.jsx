@@ -29,22 +29,20 @@ function Header() {
         <RxHamburgerMenu
           className="text-lg sm:text-xl lg:text-2xl"
           onClick={isOpenSidebarToggle}
+          aria-label="Toggle sidebar menu"
         />
         <span className="hidden sm:inline">Menu</span>
         {isOpenSidebar && (
           <Sidebar
             isOpenSidebar={isOpenSidebar}
-            setIsOpenSidebar={setIsOpenSidebar}
             isOpenSidebarToggle={isOpenSidebarToggle}
           />
         )}
-        <div>
-          <SearchBar />
-        </div>
+        <SearchBar />
       </div>
 
       {/* Center Section: Branding */}
-      <div className="justify-self-center ">
+      <div className="justify-self-center">
         <Link href="/">
           <img
             className="lg:w-64 w-44 max-h-16"
@@ -55,22 +53,17 @@ function Header() {
       </div>
 
       {/* Right Section: Account & Cart */}
-      <div className="flex items-center	gap-4">
+      <div className="flex items-center gap-4">
         <AccountDropdownMenu />
         <button
           onClick={isOpenCartToggle}
-          className="flex items-center  text-gray-700 hover:text-gray-900"
+          className="flex items-center text-gray-700 hover:text-gray-900"
+          aria-label="Open shopping cart"
         >
           <IoBagHandleOutline className="text-xl sm:text-2xl" />
           <span className="hidden sm:inline ml-2">Cart</span>
         </button>
-        {isOpenCart && (
-          <CartPopper
-            setIsOpenCart={setIsOpenCart}
-            isOpenCart={isOpenCart}
-            isOpenCartToggle={isOpenCartToggle}
-          />
-        )}
+        {isOpenCart && <CartPopper />}
       </div>
     </header>
   );

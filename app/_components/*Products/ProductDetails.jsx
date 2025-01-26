@@ -30,7 +30,7 @@ function ProductDetails() {
   } = firstProduct || {};
 
   const price = product_item?.original_price || 0;
-  console.log(firstProduct[5]);
+
   function handleIncrement() {
     setQty(qty + 1);
   }
@@ -49,6 +49,8 @@ function ProductDetails() {
               src={product_image?.[1]?.image_filename}
               fill
               className="rounded object-cover object-center"
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 1024px" //
             />
           </div>
 
@@ -91,7 +93,7 @@ function ProductDetails() {
             </div>
             <div className="flex justify-between">
               <span className="title-font font-medium text-2xl text-gray-900">
-                € {price * qty}
+                € {price}
               </span>
               <div className="flex gap-6">
                 <HeartButton />

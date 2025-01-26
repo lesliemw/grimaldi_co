@@ -7,24 +7,26 @@ import {
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export function ProductDetailsAccordion({ care_instructions, about }) {
-  const [open, setOpen] = useState(1);
+  const [open, setOpen] = useState(null); // Set initial state to null
 
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
+  // Handle accordion toggle
+  const handleOpen = (value) => setOpen(open === value ? null : value); // Toggle to null when clicked twice
 
   return (
     <>
       <Accordion
         open={open === 1}
-        icon={open ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        icon={open === 1 ? <IoIosArrowUp /> : <IoIosArrowDown />} // Correct icon logic
       >
         <AccordionHeader className="text-sm" onClick={() => handleOpen(1)}>
           About Me
         </AccordionHeader>
         <AccordionBody>{about}</AccordionBody>
       </Accordion>
+
       <Accordion
         open={open === 2}
-        icon={open ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        icon={open === 2 ? <IoIosArrowUp /> : <IoIosArrowDown />} // Correct icon logic
       >
         <AccordionHeader className="text-sm" onClick={() => handleOpen(2)}>
           Care Instructions

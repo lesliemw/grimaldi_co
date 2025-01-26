@@ -1,17 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 
 function Footer() {
   const [email, setEmail] = useState();
+  const currentYear = new Date().getFullYear();
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      toast.success(
+        `You have successfully signed up for our newsletter with ${email}.`
+      );
+    },
+    [email]
+  );
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    toast.success(
-      `You have successfully signed up for our newsletter with ${email}.`
-    );
-  }
+  const handleEmailChange = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
 
   return (
     <footer className="bg-gray-50 font-themeFont w-full py-6 px-4  bottom-0">
@@ -31,7 +38,7 @@ function Footer() {
                 required
                 name="email"
                 autoComplete="on"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange} // Use the callback for efficiency
               />
               <button className="bg-indigo-500 hover:bg-indigo-500 text-gray-200 px-5 py-2 rounded shadow h-10 w-40">
                 Sign Up
@@ -41,9 +48,7 @@ function Footer() {
         </div>
       </div>
       <div className="flex items-center justify-center my-4">
-        <p className="text-blue-500">
-          &copy;{new Date().getFullYear()} Grimaldi & Co.
-        </p>
+        <p className="text-blue-500">&copy;{currentYear} Grimaldi & Co.</p>
 
         <div className="flex items-center"></div>
       </div>

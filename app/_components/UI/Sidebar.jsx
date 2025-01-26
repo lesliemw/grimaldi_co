@@ -5,53 +5,48 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useCallback } from "react";
 import { HiXMark } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import Link from "next/link";
 import { useLogout } from "../../_api/useLogout";
 import { useUser } from "../../_api/useUser";
-import { useProducts } from "../../_api/supabaseApi/useProducts";
 
 function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
   const { currentUser } = useUser();
   const { fname, lname } = currentUser || {};
   const { logout, isLoading } = useLogout();
-  const { products } = useProducts();
 
-  function handleClick() {
+  // Memoize the toggle function to avoid unnecessary re-renders
+  const handleClick = useCallback(() => {
     isOpenSidebarToggle();
-  }
+  }, [isOpenSidebarToggle]);
 
   return (
-    <Transition
-      show={isOpenSidebar}
-      as={Fragment}
-      onClose={isOpenSidebarToggle}
-    >
-      <Dialog as="div" className="relative z-20">
+    <Transition show={isOpenSidebar} as={Fragment} onClose={handleClick}>
+      <Dialog onClose={handleClick} as="div" className="relative z-20">
         <TransitionChild
           as={Fragment}
-          enter="ease-in-out duration-500"
+          enter="ease-in-out duration-200"
           enterFrom="opacity-0"
           enterTo="opacity-100"
-          leave="ease-in-out duration-500"
+          leave="ease-in-out duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
 
-        <div className="fixed inset-0  font-themeFont overflow-hidden">
+        <div className="fixed inset-0 font-themeFont overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 left-0 flex max-w-full pr-10">
               <TransitionChild
                 as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
+                enter="transform transition ease-in-out duration-200 sm:duration-300"
                 enterFrom="translate-x-0"
                 enterTo="translate-x-full"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                leave="transform transition ease-in-out duration-200 sm:duration-300"
                 leaveFrom="translate-x-full"
                 leaveTo="translate-x-0"
               >
@@ -76,7 +71,9 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                           </button>
                         </div>
                       </div>
+
                       <div className="border-t border-gray-200 flow-root px-4 py-6 sm:px-6">
+                        {/* Menu for Women */}
                         <DialogTitle className="text-xl font-medium text-gray-900">
                           Women
                         </DialogTitle>
@@ -121,6 +118,7 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                           </ul>
                         </div>
 
+                        {/* Menu for Men */}
                         <DialogTitle className="text-xl font-medium text-gray-900">
                           Men
                         </DialogTitle>
@@ -134,6 +132,7 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                           </ul>
                         </div>
 
+                        {/* Menu for Accessories */}
                         <DialogTitle className="text-xl font-medium text-gray-900">
                           Accessories
                         </DialogTitle>
@@ -146,6 +145,8 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                         </div>
                       </div>
                     </div>
+
+                    {/* Account and Logout Buttons */}
                     <Link href="/account" onClick={isOpenSidebarToggle}>
                       <button className="flex items-center ml-3">
                         <GoPerson className="m-2 text-sm md:text-md lg:text-2xl" />
@@ -160,7 +161,6 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                         disabled={isLoading}
                       >
                         <IoIosLogOut className="m-3 text-sm md:text-md lg:text-2xl" />
-
                         <span>Sign Out</span>
                       </button>
                     ) : (
@@ -169,7 +169,6 @@ function Sidebar({ isOpenSidebar, isOpenSidebarToggle }) {
                         className="flex ml-3 items-center"
                       >
                         <IoIosLogIn className="m-3 text-sm md:text-md lg:text-2xl" />
-
                         <Link href="/user/login">
                           <span>Sign In</span>
                         </Link>
