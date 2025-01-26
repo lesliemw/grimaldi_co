@@ -1,5 +1,5 @@
+import { memo, useCallback } from "react";
 import CartItem from "./CartItem";
-
 import { Fragment } from "react";
 import {
   Dialog,
@@ -10,16 +10,17 @@ import {
 } from "@headlessui/react";
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
-import fakeData from "../../_lib/fakeStore";
-// import { useSelector } from "react-redux";
+import fakeData from "../../_lib/fakeStore"; // Assuming this is static data
 
-export default function CartPopper({
-  setIsOpenCart,
-  isOpenCart,
-  isOpenCartToggle,
-}) {
+// Memoize the CartPopper component to avoid unnecessary re-renders
+const CartPopper = memo(({ setIsOpenCart, isOpenCart, isOpenCartToggle }) => {
+  // Use useCallback to memoize the toggle function and avoid unnecessary re-renders
+  const handleCloseCart = useCallback(() => {
+    isOpenCartToggle();
+  }, [isOpenCartToggle]);
+
   return (
-    <Transition show={isOpenCart} onClose={isOpenCartToggle} as={Fragment}>
+    <Transition show={isOpenCart} onClose={handleCloseCart} as={Fragment}>
       <Dialog as="div" className="relative z-20">
         <TransitionChild
           as={Fragment}
@@ -54,7 +55,7 @@ export default function CartPopper({
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
-                            onClick={isOpenCartToggle}
+                            onClick={handleCloseCart}
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
                           >
@@ -110,8 +111,7 @@ export default function CartPopper({
                       <div className="mt-6">
                         <Link
                           href={"/cart"}
-                          onClick={isOpenCartToggle}
-                          // disabled={!cart?.length}
+                          onClick={handleCloseCart}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 disabled:cursor-not-allowed px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-600"
                         >
                           Checkout
@@ -122,7 +122,7 @@ export default function CartPopper({
                           or {""}
                           <button
                             type="button"
-                            onClick={isOpenCartToggle}
+                            onClick={handleCloseCart}
                             className="font-medium text-indigo-500 hover:text-indigo-600"
                           >
                             Continue Shopping
@@ -140,4 +140,6 @@ export default function CartPopper({
       </Dialog>
     </Transition>
   );
-}
+});
+
+export default CartPopper;

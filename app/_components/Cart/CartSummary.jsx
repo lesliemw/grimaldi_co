@@ -1,11 +1,35 @@
 "use client";
+import React, { memo } from "react";
 import CartHeader from "./cartScreen/CartHeader";
 import CartOrderSummary from "./cartScreen/CartOrderSummary";
 import CartProducts from "./cartScreen/CartProducts";
 import fakeData from "../../_lib/fakeStore";
 
+// Memoize CartProducts to avoid unnecessary re-renders if the props don't change
+const MemoizedCartProducts = memo(CartProducts);
+
 function CartSummary() {
-  const cart = [];
+  const cart = fakeData || []; // Ensure cart data is always available and avoid checking inside JSX
+
+  // Early return if the cart is empty to reduce unnecessary renders
+  if (cart.length === 0) {
+    return (
+      <section className="flex items-center mt-20 font-themeFont mb-9">
+        <div className="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
+          <div className="p-8 bg-gray-50">
+            <h2 className="mb-8 text-4xl font-bold">Your Cart</h2>
+            <div className="h-full text-center mt-10">
+              <h1>Nothing has been added to the cart 😥</h1>
+              <p>
+                Click the back button (or the logo at the top) to continue
+                shopping.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="flex items-center mt-20 font-themeFont mb-9">
@@ -15,9 +39,8 @@ function CartSummary() {
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4 pb-20 xl:w-8/12 xl:mb-0">
               <CartHeader />
-
-              {fakeData?.map((product, i) => (
-                <CartProducts
+              {cart.map((product, i) => (
+                <MemoizedCartProducts
                   key={i}
                   src={product?.src}
                   alt={product?.alt}
@@ -26,16 +49,7 @@ function CartSummary() {
                   price={product?.price}
                 />
               ))}
-              {!fakeData?.length && (
-                <div className="h-full text-center mt-10">
-                  <h1>Nothing has been added to the cart 😥</h1>
-                  <p>
-                    Click the back button (or the logo at the top) to continue
-                    shopping.
-                  </p>
-                </div>
-              )}
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4 mt-8">
                 <span className="text-gray-700 ">Apply Coupon</span>
                 <input
                   type="text"
@@ -43,7 +57,7 @@ function CartSummary() {
                   placeholder="x304k45"
                   required=""
                 />
-                <button className="flex-1 inline-block px-8 py-2 font-bold text-center text-gray-100 bg-indigo-500 hover:bg-indigo-600 rounded-md  md:flex-none">
+                <button className="flex-1 inline-block px-8 py-2 font-bold text-center text-gray-100 bg-indigo-500 hover:bg-indigo-600 rounded-md md:flex-none">
                   Apply
                 </button>
               </div>

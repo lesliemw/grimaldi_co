@@ -63,7 +63,12 @@ function Header() {
           <IoBagHandleOutline className="text-xl sm:text-2xl" />
           <span className="hidden sm:inline ml-2">Cart</span>
         </button>
-        {isOpenCart && <CartPopper />}
+        {isOpenCart && (
+          <CartPopper
+            isOpenCart={isOpenCart}
+            isOpenCartToggle={isOpenCartToggle}
+          />
+        )}
       </div>
     </header>
   );

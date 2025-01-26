@@ -19,6 +19,7 @@ export default function AccountDetails() {
     );
   }
 
+  // Destructure currentUser once to avoid repeating it in render
   const {
     fname = "",
     lname = "",
@@ -68,7 +69,7 @@ export default function AccountDetails() {
             Account Details
           </h2>
 
-          <div className="mt-4   sm:grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10">
+          <div className="mt-4 sm:grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {accountDetails.map(({ label, value }, index) => (
               <div key={index} className="text-center flex-grow sm:text-left">
                 <label
@@ -83,7 +84,7 @@ export default function AccountDetails() {
               </div>
             ))}
             {vipStatus && (
-              <div className="col-span-full sm:col-span-2 md:col-span-1  text-center sm:text-left">
+              <div className="col-span-full sm:col-span-2 md:col-span-1 text-center sm:text-left">
                 <label className="block text-xs font-medium leading-6 text-gray-400">
                   VIP Status
                 </label>
@@ -98,8 +99,8 @@ export default function AccountDetails() {
         </div>
 
         {/* Notifications */}
-        <div className="border-b  border-gray-900/10 pb-8">
-          <h2 className="text-base font-semibold leading-7 text-gray-900 text-left ">
+        <div className="border-b border-gray-900/10 pb-8">
+          <h2 className="text-base font-semibold leading-7 text-gray-900 text-left">
             Notifications
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600 text-left">
@@ -109,7 +110,7 @@ export default function AccountDetails() {
 
           <div className="mt-6 space-y-6">
             {notifications.map(({ id, label, description, checked }) => (
-              <div className="relative flex  px-2 justify-left  gap-4" key={id}>
+              <div className="relative flex px-2 justify-left gap-4" key={id}>
                 <div className="flex h-6 items-center">
                   <input
                     id={id}

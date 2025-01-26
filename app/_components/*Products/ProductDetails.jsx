@@ -15,9 +15,9 @@ function ProductDetails() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const firstProduct = products?.[5];
+  const testProduct = products?.[5];
 
-  if (!firstProduct) return <p>No products found.</p>;
+  if (!testProduct) return <p>No products found.</p>;
 
   const {
     product_name,
@@ -27,12 +27,13 @@ function ProductDetails() {
     product_item,
     care_instructions,
     about,
-  } = firstProduct || {};
+  } = testProduct || {};
 
-  const price = product_item?.original_price || 0;
+  const price = product_item?.[0].original_price || 0;
 
   function handleIncrement() {
     setQty(qty + 1);
+    console.log(testProduct);
   }
 
   function handleDecrement() {
@@ -97,7 +98,7 @@ function ProductDetails() {
               </span>
               <div className="flex gap-6">
                 <HeartButton />
-                <AddToCartButton product={firstProduct} />
+                <AddToCartButton product={testProduct} />
               </div>
             </div>
             <div className="mt-4">
