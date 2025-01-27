@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo } from "react";
 
 function HomeScreenCallouts() {
@@ -8,36 +9,45 @@ function HomeScreenCallouts() {
       {
         name: "Women's Fashion",
         description: "Shop this season's hottest looks for women.",
+        href: "/products/womens_fashion",
         image: "/pantsuit.jpg",
         alt: "callout",
       },
       {
         name: "Men's Fashion",
         description: "Shop all of the latest looks for men.",
+        href: "/products/womens_fashion",
         image: "/bwman.jpg",
         alt: "callout",
       },
       {
         name: "Jewelry",
         description: "Find your next heirloom piece here.",
+        href: "/products/womens_fashion",
         image: "/jewelry.jpg",
         alt: "callout",
       },
       {
         name: "Shoes",
         description: "Treat your feet.",
+        href: "/products/womens_fashion",
+
         image: "/womenshoes.jpg",
         alt: "callout",
       },
       {
         name: "Handbags",
         description: "Shop for your luxury leather and vegan leather pieces.",
+        href: "/products/womens_fashion",
+
         image: "/crossbody-bag-brown.jpg",
         alt: "callout",
       },
       {
         name: "Toiletries",
         description: "Look good. Feel good. Smell good.",
+        href: "/products/womens_fashion",
+
         image: "/toiletries.jpg",
         alt: "callout",
       },
@@ -66,10 +76,10 @@ function HomeScreenCallouts() {
                   />
                 </div>
                 <h3 className="mt-4 text-sm text-gray-500">
-                  <a href={callout.href} className="hover:underline">
+                  <Link href={callout.href} className="hover:underline">
                     <span className="absolute inset-0" />
                     {callout.name}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-base font-semibold text-gray-900">
                   {callout.description}
