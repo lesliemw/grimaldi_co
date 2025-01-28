@@ -16,7 +16,7 @@ function ProductsMap({ category_id, parent_product_category_id }) {
     filteredProductsByCategory = [],
     isLoading = false,
     error = null,
-  } = useFilterProductsByCategory(category_id || parent_product_category_id) ||
+  } = useFilterProductsByCategory(category_id, parent_product_category_id) ||
   {};
 
   const products = useMemo(

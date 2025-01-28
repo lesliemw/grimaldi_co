@@ -17,18 +17,16 @@ export function useFilterProductsByCategory(
       parent_product_category_id,
     ],
     queryFn: () => {
-      // Ensure we handle cases when category_id and parent_product_category_id are undefined
       if (!category_id && !parent_product_category_id) {
         console.warn(
           "Both category_id and parent_product_category_id are undefined or null."
         );
-        return Promise.resolve([]); // Return empty array if no category or parent category provided
+        return Promise.resolve([]);
       }
 
-      // Call the updated filterProducts function
       return filterProducts(category_id, parent_product_category_id);
     },
-    enabled: !!category_id || !!parent_product_category_id, // Ensure query is enabled only when one of the ids are defined
+    enabled: !!category_id || !!parent_product_category_id,
     onError: (err) => {
       console.error("Error fetching products:", err);
       toast.error("Failed to load your products. Please try again.");

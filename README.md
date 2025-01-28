@@ -24,9 +24,10 @@
 <ul>
 <li>✅sidebar</li>
 <li>product cards</li>
+<li>✅modal</li>
 <li>✅account details page</li>
 <li>checkout page</li>
-<li>loading ui</li>
+<li>✅loading ui</li>
 <li>✅404 page</li>
 <li>successful payment page</li>
 <li>dropdown menu for page order</li>

@@ -48,20 +48,22 @@ function ProductDetails({ product }) {
             <h1 className="text-3xl font-bold">{product.product_name}</h1>
             <p className="mt-4">{product.product_description}</p>
             <div className="flex gap-4">
-              <div className="mt-6">
-                <span className="mr-3">Size</span>
-                <select
-                  className="rounded border py-2 pl-3 pr-10"
-                  value={size}
-                  onChange={handleSizeChange}
-                >
-                  {product.size_name?.map((item, i) => (
-                    <option key={i} defaultValue={item.size_name}>
-                      {item.size_name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {!product.size_name === null && (
+                <div className="mt-6">
+                  <span className="mr-3">Size</span>
+                  <select
+                    className="rounded border py-2 pl-3 pr-10"
+                    value={size}
+                    onChange={handleSizeChange}
+                  >
+                    {product.size_name?.map((item, i) => (
+                      <option key={i} defaultValue={item.size_name}>
+                        {item.size_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               <div className="mt-6">
                 <QuantityCounter
