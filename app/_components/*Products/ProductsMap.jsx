@@ -61,7 +61,7 @@ function ProductsMap({ category_id, parent_product_category_id }) {
                   alt={product.product_name || "Product Image"}
                   width={500}
                   height={500}
-                  className="max-h-96 object-scale-down rounded-lg"
+                  className="max-h-96 object-scale-down rounded-lg transition-transform duration-300 group-hover:scale-105"
                   priority
                 />
               </div>

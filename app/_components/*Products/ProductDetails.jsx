@@ -37,7 +37,7 @@ function ProductDetails({ product }) {
               src={product.image_filename || "/default-image.png"}
               width={500}
               height={500}
-              className="rounded object-cover object-center"
+              className="rounded object-cover object-center "
               loading="lazy"
             />
           </div>
