@@ -29,8 +29,8 @@ function ProductDetails({ product }) {
 
   return (
     <section className="text-gray-700 mt-10 font-themeFont overflow-hidden bg-white ">
-      <div className="container px-5 py-10 mx-auto">
-        <div className="flex flex-wrap">
+      <div className="container px-5">
+        <div className="md:flex  grid grid-cols-1">
           <div className="w-full lg:w-1/2">
             <Image
               alt={product.product_name}
@@ -41,28 +41,26 @@ function ProductDetails({ product }) {
               loading="lazy"
             />
           </div>
-          <div className="w-full lg:w-1/2 pl-8">
-            <h2 className="text-sm text-gray-500">
+          <div className="w-full lg:w-1/2 sm:pl-8 mt-4 sm:mt-0">
+            <h2 className="text-sm text-gray-500 ">
               {product.product_category_name || "No Category"}
             </h2>
             <h1 className="text-3xl font-bold">{product.product_name}</h1>
             <p className="mt-4">{product.product_description}</p>
-            <div className="flex  gap-4">
+            <div className="sm:flex  sm:gap-4">
               <div className="mt-6 flex items-center">
                 <span className="mr-3">Size</span>
                 <select
-                  className="rounded border py-2 pl-3 "
-                  value={size} // Ensure value is a single string
+                  className="rounded border py-1.5 px-3"
+                  value={size}
                   onChange={handleSizeChange}
                 >
                   <option value="" disabled>
                     Select Size
                   </option>{" "}
-                  {/* Placeholder option */}
                   {product.size_name?.map((size, i) => (
                     <option key={i} value={size}>
                       {size}{" "}
-                      {/* Directly use `size` since size_name is an array */}
                     </option>
                   ))}
                 </select>
