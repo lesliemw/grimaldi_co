@@ -6,22 +6,15 @@ import HeartButton from "../UI/HeartButton";
 import QuantityCounter from "../UI/QuantityCounter";
 import { ProductDetailsAccordion } from "../UI/ProductCardAccordion";
 import { useState } from "react";
+import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
 
 function ProductDetails({ product }) {
-  const [qty, setQty] = useState(1);
   const [size, setSize] = useState();
+  const { qty } = useQuantityCounter();
 
   if (!product) return <p>No product data available.</p>;
 
   const price = product.sale_price || product.original_price || 0;
-
-  function handleIncrement() {
-    setQty(qty + 1);
-  }
-
-  function handleDecrement() {
-    if (qty > 1) setQty(qty - 1);
-  }
 
   function handleSizeChange(event) {
     setSize(event.target.value);
@@ -31,13 +24,13 @@ function ProductDetails({ product }) {
     <section className="text-gray-700 mt-10 font-themeFont overflow-hidden bg-white ">
       <div className="container px-5">
         <div className="md:flex  grid grid-cols-1">
-          <div className="w-full lg:w-1/2">
+          <div className="w-full  lg:w-1/2">
             <Image
               alt={product.product_name}
               src={product.image_filename || "/default-image.png"}
               width={500}
               height={500}
-              className="rounded object-cover object-center "
+              className="rounded  object-center "
               loading="lazy"
             />
           </div>
@@ -67,15 +60,11 @@ function ProductDetails({ product }) {
               </div>
 
               <div className="mt-6 ">
-                <QuantityCounter
-                  handleIncrement={handleIncrement}
-                  handleDecrement={handleDecrement}
-                  qty={qty}
-                />
+                <QuantityCounter />
               </div>
             </div>
             <div className="flex justify-between items-center mt-6">
-              <span className="text-2xl font-bold">€ {price}</span>
+              <span className="text-2xl font-bold">€ {price * qty}</span>
               <div className="flex gap-4">
                 <HeartButton />
                 <AddToCartButton product={product} />

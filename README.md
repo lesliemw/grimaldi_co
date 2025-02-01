@@ -23,7 +23,7 @@
 <h3>ui</h3>
 <ul>
 <li>✅sidebar</li>
-<li>product cards</li>
+<li>✅product cards</li>
 <li>✅modal</li>
 <li>✅account details page</li>
 <li>checkout page</li>
