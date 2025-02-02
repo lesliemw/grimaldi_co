@@ -10,11 +10,11 @@ import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
 
 function ProductDetails({ product }) {
   const [size, setSize] = useState();
-  const { qty } = useQuantityCounter();
+  const { qty, increment, decrement } = useQuantityCounter();
 
   if (!product) return <p>No product data available.</p>;
 
-  const price = product.sale_price || product.original_price || 0;
+  const price = (product.sale_price || product.original_price || 0) * qty;
 
   function handleSizeChange(event) {
     setSize(event.target.value);
@@ -60,11 +60,15 @@ function ProductDetails({ product }) {
               </div>
 
               <div className="mt-6 ">
-                <QuantityCounter />
+                <QuantityCounter
+                  qty={qty}
+                  increment={increment}
+                  decrement={decrement}
+                />
               </div>
             </div>
             <div className="flex justify-between items-center mt-6">
-              <span className="text-2xl font-bold">€ {price * qty}</span>
+              <span className="text-2xl font-bold">€ {price}</span>
               <div className="flex gap-4">
                 <HeartButton />
                 <AddToCartButton product={product} />

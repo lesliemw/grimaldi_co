@@ -1,7 +1,4 @@
-import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
-
-function QuantityCounter() {
-  const { qty, increment, decrement } = useQuantityCounter();
+function QuantityCounter({ qty, increment, decrement }) {
   return (
     <div className="flex items-center ">
       <h2>Quantity</h2>
