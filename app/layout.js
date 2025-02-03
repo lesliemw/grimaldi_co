@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
               <div>{children}</div>
               <Footer />
               <Toaster
-                position="top-right"
+                position="bottom-center"
                 reverseOrder={false}
                 toastOptions={{
                   style: {

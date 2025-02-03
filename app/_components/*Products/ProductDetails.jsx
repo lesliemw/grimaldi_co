@@ -8,7 +8,7 @@ import { ProductDetailsAccordion } from "../UI/ProductCardAccordion";
 import { useState } from "react";
 import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
 
-function ProductDetails({ product }) {
+function ProductDetails({ product, setOpen }) {
   const [size, setSize] = useState();
   const { qty, increment, decrement } = useQuantityCounter();
 
@@ -52,7 +52,7 @@ function ProductDetails({ product }) {
                     Select Size
                   </option>{" "}
                   {product.size_name?.map((size, i) => (
-                    <option key={i} value={size}>
+                    <option key={i} defaultValue={size}>
                       {size}{" "}
                     </option>
                   ))}
@@ -71,7 +71,7 @@ function ProductDetails({ product }) {
               <span className="text-2xl font-bold">€ {price}</span>
               <div className="flex gap-4">
                 <HeartButton />
-                <AddToCartButton product={product} />
+                <AddToCartButton product={product} setOpen={setOpen} />
               </div>
             </div>
             <div className="mt-8">

@@ -4,53 +4,56 @@ import { createContext, useContext, useState } from "react";
 // Create the Cart Context
 const CartContext = createContext();
 
-export function useCart() {
-  return useContext(CartContext);
-}
-
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  // Add item to cart
-  const addToCart = (newItem) => {
+  // Add an item to the cart
+  function addToCart(newItem) {
     setCart((prevCart) => {
       const existingItemIndex = prevCart.findIndex(
-        (item) =>
-          item.product_name === newItem.product_name &&
-          item.size_name === newItem.size_name
+        (item) => item.id === newItem.id && item.size === newItem.size
       );
 
       if (existingItemIndex !== -1) {
-        // If the item already exists, update the quantity
-        return prevCart.map((item, index) => {
-          if (index === existingItemIndex) {
-            return {
-              ...item,
-              qty: item.qty + newItem.qty, // Update quantity
-            };
-          }
-          return item;
-        });
+        // If item with same ID & size exists, update quantity
+        return prevCart.map((item, index) =>
+          index === existingItemIndex
+            ? { ...item, quantity: item.quantity + newItem.quantity }
+            : item
+        );
       } else {
-        // Add new item to the cart
+        // Otherwise, add as a new item
         return [...prevCart, newItem];
       }
     });
-  };
+  }
 
-  // Remove item from cart
-  const removeFromCart = (product_name, size_name) => {
+  // Remove an item from the cart
+  function removeFromCart(id, size) {
     setCart((prevCart) =>
-      prevCart.filter(
-        (item) =>
-          item.product_name !== product_name || item.size_name !== size_name
+      prevCart.filter((item) => !(item.id === id && item.size === size))
+    );
+  }
+
+  // Update item quantity
+  function updateQuantity(id, size, quantity) {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id && item.size === size ? { ...item, quantity } : item
       )
     );
-  };
+  }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateQuantity }}
+    >
       {children}
     </CartContext.Provider>
   );
+}
+
+// Custom Hook to use Cart Context
+export function useCart() {
+  return useContext(CartContext);
 }

@@ -11,10 +11,11 @@ import {
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
 import fakeData from "../../_lib/fakeStore"; // Assuming this is static data
+import { useCart } from "../../_context/useCart";
 
-// Memoize the CartPopper component to avoid unnecessary re-renders
-const CartPopper = memo(({ setIsOpenCart, isOpenCart, isOpenCartToggle }) => {
-  // Use useCallback to memoize the toggle function and avoid unnecessary re-renders
+const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
+  const { cart } = useCart();
+
   const handleCloseCart = useCallback(() => {
     isOpenCartToggle();
   }, [isOpenCartToggle]);
@@ -67,23 +68,11 @@ const CartPopper = memo(({ setIsOpenCart, isOpenCart, isOpenCartToggle }) => {
                       </div>
 
                       <div className="mt-8">
-                        {fakeData?.length ? (
+                        {cart?.length ? (
                           <div className="flow-root">
-                            <ul
-                              role="list"
-                              className="-my-6 divide-y divide-gray-200"
-                            >
-                              {fakeData?.map((item, i) => (
-                                <CartItem
-                                  key={item._id || i}
-                                  item={item}
-                                  src={item.src}
-                                  alt={item.alt}
-                                  name={item.name}
-                                  size={item.size}
-                                  price={item.price}
-                                  qty={item.qty || 1}
-                                />
+                            <ul className="-my-6 divide-y divide-gray-200">
+                              {cart.map((item, i) => (
+                                <CartItem key={i} item={item} />
                               ))}
                             </ul>
                           </div>
@@ -103,7 +92,13 @@ const CartPopper = memo(({ setIsOpenCart, isOpenCart, isOpenCartToggle }) => {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>€ 1000</p>
+                        <p>
+                          €{" "}
+                          {cart.reduce(
+                            (total, item) => total + item.price * item.quantity,
+                            0
+                          )}
+                        </p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.

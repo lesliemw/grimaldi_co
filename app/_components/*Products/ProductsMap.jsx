@@ -88,7 +88,7 @@ function ProductsMap({ category_id, parent_product_category_id }) {
       {/* Modal for Product Details */}
       {isModalOpen && (
         <Modal open={isModalOpen} setOpen={toggleModalOpen}>
-          <ProductDetails product={selectedProduct} />
+          <ProductDetails product={selectedProduct} setOpen={toggleModalOpen} />
         </Modal>
       )}
     </div>
