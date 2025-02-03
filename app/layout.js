@@ -3,6 +3,7 @@ import Footer from "./_components/UI/Footer";
 import Header from "./_components/UI/Header";
 import { TanstackProvider } from "./_components/Providers/TanstackProvider";
 import { AuthProvider } from "./_context/userContext";
+import { CartProvider } from "./_context/useCart";
 
 import "./_styles/globals.css";
 
@@ -20,18 +21,20 @@ export default function RootLayout({ children }) {
       <body className={`max-h-screen`}>
         <TanstackProvider>
           <AuthProvider>
-            <Header />
-            <div>{children}</div>
-            <Footer />
-            <Toaster
-              position="top-right"
-              reverseOrder={false}
-              toastOptions={{
-                style: {
-                  textAlign: "center",
-                },
-              }}
-            />
+            <CartProvider>
+              <Header />
+              <div>{children}</div>
+              <Footer />
+              <Toaster
+                position="top-right"
+                reverseOrder={false}
+                toastOptions={{
+                  style: {
+                    textAlign: "center",
+                  },
+                }}
+              />
+            </CartProvider>
           </AuthProvider>
         </TanstackProvider>
       </body>
