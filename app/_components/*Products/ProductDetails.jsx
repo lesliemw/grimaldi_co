@@ -71,7 +71,11 @@ function ProductDetails({ product, setOpen }) {
               <span className="text-2xl font-bold">€ {price}</span>
               <div className="flex gap-4">
                 <HeartButton />
-                <AddToCartButton product={product} setOpen={setOpen} />
+                <AddToCartButton
+                  product={product}
+                  setOpen={setOpen}
+                  qty={qty}
+                />
               </div>
             </div>
             <div className="mt-8">

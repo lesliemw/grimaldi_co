@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { useCart } from "../../_context/useCart";
 import { IoBagHandleOutline } from "react-icons/io5";
 
-function AddToCartButton({ product, setOpen, size }) {
+function AddToCartButton({ product, setOpen, qty }) {
   const { addToCart } = useCart();
 
   function handleAddToCart() {
@@ -11,7 +11,7 @@ function AddToCartButton({ product, setOpen, size }) {
       product_name: product.product_name,
       price: product.original_price,
       size: product.size_name,
-      quantity: 1,
+      quantity: qty,
       image: product.image_filename || "/placeholder-image.jpg",
     };
 
