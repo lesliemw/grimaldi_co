@@ -14,7 +14,7 @@ function ProductDetails({ product, setOpen }) {
 
   if (!product) return <p>No product data available.</p>;
 
-  const price = (product.sale_price || product.original_price || 0) * qty;
+  const price = (product.original_price || product.sale_price || 0) * qty;
 
   function handleSizeChange(event) {
     setSize(event.target.value);
