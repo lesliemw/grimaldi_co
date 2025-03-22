@@ -3,13 +3,13 @@ import React, { memo } from "react";
 import CartHeader from "./cartScreen/CartHeader";
 import CartOrderSummary from "./cartScreen/CartOrderSummary";
 import CartProducts from "./cartScreen/CartProducts";
-import fakeData from "../../_lib/fakeStore";
+import { useCart } from "../../_context/useCart";
 
 // Memoize CartProducts to avoid unnecessary re-renders if the props don't change
 const MemoizedCartProducts = memo(CartProducts);
 
 function CartSummary() {
-  const cart = fakeData || []; // Ensure cart data is always available and avoid checking inside JSX
+  const { cart } = useCart();
 
   // Early return if the cart is empty to reduce unnecessary renders
   if (cart.length === 0) {
