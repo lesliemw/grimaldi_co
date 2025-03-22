@@ -10,7 +10,6 @@ import {
 } from "@headlessui/react";
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
-import fakeData from "../../_lib/fakeStore"; // Assuming this is static data
 import { useCart } from "../../_context/useCart";
 
 const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {

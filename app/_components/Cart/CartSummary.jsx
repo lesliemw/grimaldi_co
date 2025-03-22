@@ -42,11 +42,13 @@ function CartSummary() {
               {cart.map((product, i) => (
                 <MemoizedCartProducts
                   key={i}
-                  src={product?.src}
-                  alt={product?.alt}
-                  name={product?.name}
-                  description={product?.description}
+                  src={product?.image}
+                  alt={product?.product_name}
+                  name={product?.product_name}
+                  description={product?.product_description}
                   price={product?.price}
+                  size={product.size}
+                  qty={product.quantity}
                 />
               ))}
               <div className="flex flex-wrap items-center gap-4 mt-8">
