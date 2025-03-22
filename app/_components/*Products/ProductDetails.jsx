@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
 
 function ProductDetails({ product, setOpen }) {
-  const [size, setSize] = useState();
+  const [size, setSize] = useState(product.size_name[0] || "");
   const { qty, increment, decrement } = useQuantityCounter();
 
   if (!product) return <p>No product data available.</p>;
@@ -30,7 +30,7 @@ function ProductDetails({ product, setOpen }) {
               src={product.image_filename || "/default-image.png"}
               width={500}
               height={500}
-              className="rounded  object-center "
+              className="rounded lg:max-h-[500px] lg:object-scale-down object-center "
               loading="lazy"
             />
           </div>
@@ -74,6 +74,7 @@ function ProductDetails({ product, setOpen }) {
                 <AddToCartButton
                   product={product}
                   setOpen={setOpen}
+                  size={size}
                   qty={qty}
                 />
               </div>

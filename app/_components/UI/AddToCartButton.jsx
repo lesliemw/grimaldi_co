@@ -2,15 +2,15 @@ import toast from "react-hot-toast";
 import { useCart } from "../../_context/useCart";
 import { IoBagHandleOutline } from "react-icons/io5";
 
-function AddToCartButton({ product, setOpen, qty }) {
+function AddToCartButton({ product, setOpen, qty, size }) {
   const { addToCart } = useCart();
 
   function handleAddToCart() {
     const newItem = {
-      id: product.id,
+      id: product.product_id,
       product_name: product.product_name,
       price: product.original_price,
-      size: product.size_name,
+      size,
       quantity: qty,
       image: product.image_filename || "/placeholder-image.jpg",
     };
