@@ -2,8 +2,8 @@ import toast from "react-hot-toast";
 import { useCart } from "../../_context/useCart";
 import { IoBagHandleOutline } from "react-icons/io5";
 
-function AddToCartButton({ product, setOpen, qty, size }) {
-  const { addToCart } = useCart();
+function AddToCartButton({ product, setOpen, size }) {
+  const { addToCart, qty } = useCart();
 
   function handleAddToCart() {
     const newItem = {

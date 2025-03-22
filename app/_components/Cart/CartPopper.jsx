@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useCart } from "../../_context/useCart";
 
 const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
-  const { cart } = useCart();
+  const { cart, qty } = useCart();
 
   const handleCloseCart = useCallback(() => {
     isOpenCartToggle();
@@ -71,7 +71,7 @@ const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
                           <div className="flow-root">
                             <ul className="-my-6 divide-y divide-gray-200">
                               {cart.map((item, i) => (
-                                <CartItem key={i} item={item} />
+                                <CartItem key={i} item={item} qty={qty} />
                               ))}
                             </ul>
                           </div>
@@ -94,7 +94,7 @@ const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
                         <p>
                           €{" "}
                           {cart.reduce(
-                            (total, item) => total + item.price * item.quantity,
+                            (total, item) => total + item.price * item.qty,
                             0
                           )}
                         </p>

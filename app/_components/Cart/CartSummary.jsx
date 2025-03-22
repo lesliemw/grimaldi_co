@@ -4,12 +4,13 @@ import CartHeader from "./cartScreen/CartHeader";
 import CartOrderSummary from "./cartScreen/CartOrderSummary";
 import CartProducts from "./cartScreen/CartProducts";
 import { useCart } from "../../_context/useCart";
+import QuantityCounter from "../UI/QuantityCounter";
 
 // Memoize CartProducts to avoid unnecessary re-renders if the props don't change
 const MemoizedCartProducts = memo(CartProducts);
 
 function CartSummary() {
-  const { cart } = useCart();
+  const { cart, qty } = useCart();
 
   // Early return if the cart is empty to reduce unnecessary renders
   if (cart.length === 0) {
@@ -48,7 +49,7 @@ function CartSummary() {
                   description={product?.product_description}
                   price={product?.price}
                   size={product.size}
-                  qty={product.quantity}
+                  qty={qty}
                 />
               ))}
               <div className="flex flex-wrap items-center gap-4 mt-8">

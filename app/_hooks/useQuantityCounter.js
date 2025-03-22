@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCart } from "../_context/useCart";
 
-export function useQuantityCounter(initialQty = 1, minQty = 1, maxQty = 99) {
-  const [qty, setQty] = useState(initialQty);
+export function useQuantityCounter(minQty = 1, maxQty = 99) {
+  const { qty, setQty } = useCart();
 
   function increment() {
     setQty((prev) => (prev < maxQty ? prev + 1 : prev));

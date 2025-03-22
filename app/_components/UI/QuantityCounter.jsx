@@ -1,6 +1,10 @@
-function QuantityCounter({ qty, increment, decrement }) {
+import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
+
+function QuantityCounter() {
+  const { qty, increment, decrement } = useQuantityCounter();
   return (
     <div className="flex items-center ">
+      <h2>Quantity</h2>
       <div className="w-auto px-4 md:w-1/6 lg:w-2/12 ">
         <div className="inline-flex items-center px-4 font-semibold text-gray-500 border  border-gray-200 rounded-md   ">
           <button className=" hover:text-gray-700 " onClick={decrement}>
