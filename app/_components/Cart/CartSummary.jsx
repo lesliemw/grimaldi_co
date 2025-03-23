@@ -10,7 +10,8 @@ import QuantityCounter from "../UI/QuantityCounter";
 const MemoizedCartProducts = memo(CartProducts);
 
 function CartSummary() {
-  const { cart, qty } = useCart();
+  const { cart } = useCart();
+  console.log(cart);
 
   // Early return if the cart is empty to reduce unnecessary renders
   if (cart.length === 0) {
@@ -47,9 +48,9 @@ function CartSummary() {
                   alt={product?.product_name}
                   name={product?.product_name}
                   description={product?.product_description}
-                  price={product?.price}
+                  price={product?.price * product?.quantity}
                   size={product.size}
-                  qty={qty}
+                  qty={product.quantity}
                 />
               ))}
               <div className="flex flex-wrap items-center gap-4 mt-8">
