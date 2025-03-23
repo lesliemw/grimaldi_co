@@ -71,7 +71,7 @@ const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
                           <div className="flow-root">
                             <ul className="-my-6 divide-y divide-gray-200">
                               {cart.map((item, i) => (
-                                <CartItem key={i} item={item} qty={qty} />
+                                <CartItem key={i} item={item} />
                               ))}
                             </ul>
                           </div>
