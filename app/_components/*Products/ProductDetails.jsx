@@ -59,7 +59,10 @@ function ProductDetails({ product, setOpen }) {
                 </select>
               </div>
 
-              <div className="mt-6 ">
+              <div className="mt-6 flex items-center">
+                <span>
+                  <h2>Quantity</h2>
+                </span>
                 <QuantityCounter
                   qty={qty}
                   increment={increment}
