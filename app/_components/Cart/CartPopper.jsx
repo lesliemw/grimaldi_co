@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useCart } from "../../_context/useCart";
 
 const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
-  const { cart, qty } = useCart();
+  const { cart } = useCart();
 
   const handleCloseCart = useCallback(() => {
     isOpenCartToggle();
