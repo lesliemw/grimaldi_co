@@ -94,7 +94,7 @@ const CartPopper = memo(function CartPopper({ isOpenCart, isOpenCartToggle }) {
                         <p>
                           €{" "}
                           {cart.reduce(
-                            (total, item) => total + item.price * item.qty,
+                            (total, item) => total + item.price * item.quantity,
                             0
                           )}
                         </p>
