@@ -1,7 +1,18 @@
-import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
+import { useCart } from "../../_context/useCart";
 
 function QuantityCounter({ qty }) {
-  const { increment, decrement } = useQuantityCounter();
+  const { setQty } = useCart();
+
+  const maxQty = 99;
+  const minQty = 1;
+
+  function increment() {
+    setQty(qty < maxQty ? qty + 1 : qty);
+  }
+
+  function decrement() {
+    setQty(qty > minQty ? qty - 1 : qty);
+  }
   return (
     <div className="flex items-center ">
       <div className="w-auto px-4 md:w-1/6 lg:w-2/12 ">
