@@ -1,4 +1,5 @@
 import Image from "next/image";
+import QuantityCounter from "../../UI/QuantityCounter";
 // import QuantityCounter from "../../UI/QuantityCounter";
 // import { useCart } from "../../../_context/useCart";
 
@@ -33,9 +34,7 @@ function CartProducts({ src, alt, name, description, price, size, qty }) {
         <div className="hidden px-4 lg:block lg:w-2/12">
           <p className="text-lg font-bold text-indigo-500 ">€ {price}</p>
         </div>
-        <div className="w-auto px-4 text-center md:w-1/6 lg:w-2/12 ">
-          <p className="text-lg font-bold text-indigo-500 ">{qty}</p>
-        </div>
+        <QuantityCounter />
         <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
           <p className="text-lg font-bold text-indigo-500 ">€ {price * qty}</p>
         </div>
