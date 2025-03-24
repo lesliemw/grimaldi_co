@@ -17,7 +17,6 @@ function AddToCartButton({ product, setOpen, size }) {
 
     addToCart(newItem);
     toast.success(`${newItem.product_name} added to your cart`);
-    console.log(newItem);
     setOpen();
   }
 

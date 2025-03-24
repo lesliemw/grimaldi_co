@@ -11,7 +11,6 @@ const MemoizedCartProducts = memo(CartProducts);
 
 function CartSummary() {
   const { cart } = useCart();
-  console.log(cart);
 
   // Early return if the cart is empty to reduce unnecessary renders
   if (cart.length === 0) {
