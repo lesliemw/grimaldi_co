@@ -30,7 +30,7 @@ function CartProducts({ src, alt, name, description, price, size, qty }) {
         <div className="hidden px-4 lg:block lg:w-2/12">
           <p className="text-lg font-bold text-indigo-500 ">€ {price}</p>
         </div>
-        <QuantityCounter qty={qty} />
+        <QuantityCounter />
         <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
           <p className="text-lg font-bold text-indigo-500 ">€ {price * qty}</p>
         </div>

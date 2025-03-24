@@ -6,15 +6,17 @@ import HeartButton from "../UI/HeartButton";
 import QuantityCounter from "../UI/QuantityCounter";
 import { ProductDetailsAccordion } from "../UI/ProductCardAccordion";
 import { useState } from "react";
-import { useQuantityCounter } from "../../_hooks/useQuantityCounter";
+import { useCart } from "../../_context/useCart";
 
 function ProductDetails({ product, setOpen }) {
   const [size, setSize] = useState(product.size_name[0] || "");
-  const { qty, increment, decrement } = useQuantityCounter();
+
+  console.log(product.product_id);
 
   if (!product) return <p>No product data available.</p>;
 
-  const price = (product.original_price || product.sale_price || 0) * qty;
+  const price =
+    (product.original_price || product.sale_price || 0) * product.quantity;
 
   function handleSizeChange(event) {
     setSize(event.target.value);
@@ -63,11 +65,7 @@ function ProductDetails({ product, setOpen }) {
                 <span>
                   <h2>Quantity</h2>
                 </span>
-                <QuantityCounter
-                  qty={qty}
-                  increment={increment}
-                  decrement={decrement}
-                />
+                <QuantityCounter id={product.product_id} />
               </div>
             </div>
             <div className="flex justify-between items-center mt-6">
@@ -78,7 +76,6 @@ function ProductDetails({ product, setOpen }) {
                   product={product}
                   setOpen={setOpen}
                   size={size}
-                  qty={qty}
                 />
               </div>
             </div>

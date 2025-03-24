@@ -9,7 +9,7 @@ import Image from "next/image";
 import ProductDetailsButton from "../UI/ProductDetailsButton";
 
 function ProductsMap({ category_id, parent_product_category_id }) {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
@@ -51,7 +51,7 @@ function ProductsMap({ category_id, parent_product_category_id }) {
         <div className="grid grid-cols-1 mx-auto gap-x-16 gap-y-20 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-24">
           {products.map((product, i) => (
             <div
-              key={product.product_id || i} // Use product_id as key
+              key={product.product_id} // Use product_id as key
               className="grid grid-cols-1 items-center cursor-pointer"
               onClick={() => handleProductClick(product)}
             >

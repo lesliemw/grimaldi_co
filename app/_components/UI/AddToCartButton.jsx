@@ -3,7 +3,7 @@ import { useCart } from "../../_context/useCart";
 import { IoBagHandleOutline } from "react-icons/io5";
 
 function AddToCartButton({ product, setOpen, size }) {
-  const { addToCart, qty } = useCart();
+  const { addToCart } = useCart();
 
   function handleAddToCart() {
     const newItem = {
@@ -11,7 +11,7 @@ function AddToCartButton({ product, setOpen, size }) {
       product_name: product.product_name,
       price: product.original_price,
       size,
-      quantity: qty,
+      quantity: product.quantity || 1,
       image: product.image_filename || "/placeholder-image.jpg",
     };
 
