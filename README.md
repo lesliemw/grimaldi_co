@@ -8,6 +8,7 @@
 <li>Context</li>
 <li>Supabase</li>
 <li>SupabaseAuth</li>
+<li>react-hot-toast</li>
 
 </ul>
 
