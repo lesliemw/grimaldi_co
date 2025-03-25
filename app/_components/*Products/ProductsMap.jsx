@@ -43,7 +43,6 @@ function ProductsMap({ category_id, parent_product_category_id }) {
   function handleProductClick(product) {
     setSelectedProduct(product);
     setIsModalOpen(true);
-    console.log(selectedProduct);
   }
 
   return (

@@ -6,7 +6,6 @@ export function useQuantityCounter(id, minQty = 1, maxQty = 99) {
   // Find the specific item in the cart
   const item = cart.find((product) => product.id === id);
   const qty = item ? item.quantity : 1;
-  console.log(item);
 
   function increment() {
     if (qty < maxQty) incrementQuantity(id);
