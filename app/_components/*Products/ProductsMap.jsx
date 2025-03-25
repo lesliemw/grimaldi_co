@@ -43,15 +43,16 @@ function ProductsMap({ category_id, parent_product_category_id }) {
   function handleProductClick(product) {
     setSelectedProduct(product);
     setIsModalOpen(true);
+    console.log(selectedProduct);
   }
 
   return (
     <div className="bg-white font-themeFont">
       <div className="px-4 py-16 sm:px-6 sm:py-24 lg:px-16">
         <div className="grid grid-cols-1 mx-auto gap-x-16 gap-y-20 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-24">
-          {products.map((product, i) => (
+          {products.map((product) => (
             <div
-              key={product.product_id} // Use product_id as key
+              key={product.product_id}
               className="grid grid-cols-1 items-center cursor-pointer"
               onClick={() => handleProductClick(product)}
             >

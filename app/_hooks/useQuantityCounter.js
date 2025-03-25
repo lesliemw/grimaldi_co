@@ -1,14 +1,19 @@
 import { useCart } from "../_context/useCart";
 
-export function useQuantityCounter(minQty = 1, maxQty = 99) {
-  const { qty, setQty } = useCart();
+export function useQuantityCounter(id, minQty = 1, maxQty = 99) {
+  const { cart, incrementQuantity, decrementQuantity } = useCart();
+
+  // Find the specific item in the cart
+  const item = cart.find((product) => product.id === id);
+  const qty = item ? item.quantity : 1;
+  console.log(item);
 
   function increment() {
-    setQty((prev) => (prev < maxQty ? prev + 1 : prev));
+    if (qty < maxQty) incrementQuantity(id);
   }
 
   function decrement() {
-    setQty((prev) => (prev > minQty ? prev - 1 : prev));
+    if (qty > minQty) decrementQuantity(id);
   }
 
   return { qty, increment, decrement };

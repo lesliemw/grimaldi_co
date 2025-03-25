@@ -1,7 +1,13 @@
 import Image from "next/image";
 import QuantityCounter from "../../UI/QuantityCounter";
+import { useCart } from "../../../_context/useCart";
 
-function CartProducts({ src, alt, name, description, price, size, qty }) {
+function CartProducts({ id, src, alt, name, description, price, size }) {
+  const { cart } = useCart();
+
+  const product = cart.find((p) => p.id === id);
+  const qty = product?.quantity || 1;
+
   return (
     <div>
       <div className="flex  items-center mb-6 -mx-4 md:mb-8">
@@ -30,7 +36,7 @@ function CartProducts({ src, alt, name, description, price, size, qty }) {
         <div className="hidden px-4 lg:block lg:w-2/12">
           <p className="text-lg font-bold text-indigo-500 ">€ {price}</p>
         </div>
-        <QuantityCounter />
+        <QuantityCounter id={id} />
         <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
           <p className="text-lg font-bold text-indigo-500 ">€ {price * qty}</p>
         </div>
