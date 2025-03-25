@@ -11,8 +11,6 @@ import { useCart } from "../../_context/useCart";
 function ProductDetails({ product, setOpen }) {
   const [size, setSize] = useState(product.size_name[0] || "");
 
-  console.log(product.product_id);
-
   if (!product) return <p>No product data available.</p>;
 
   const price =
