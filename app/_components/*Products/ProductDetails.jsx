@@ -6,7 +6,6 @@ import HeartButton from "../UI/HeartButton";
 import QuantityCounter from "../UI/QuantityCounter";
 import { ProductDetailsAccordion } from "../UI/ProductCardAccordion";
 import { useState } from "react";
-import { useCart } from "../../_context/useCart";
 
 function ProductDetails({ product, setOpen }) {
   const [size, setSize] = useState(product.size_name[0] || "");
@@ -14,11 +13,14 @@ function ProductDetails({ product, setOpen }) {
   if (!product) return <p>No product data available.</p>;
 
   const price =
-    (product.original_price || product.sale_price || 0) * product.quantity;
+    (product.original_price || product.sale_price || 0) *
+    (product.quantity || 1);
 
   function handleSizeChange(event) {
     setSize(event.target.value);
   }
+
+  console.log(product);
 
   return (
     <section className="text-gray-700 mt-10 font-themeFont overflow-hidden bg-white ">

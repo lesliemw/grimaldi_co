@@ -74,7 +74,7 @@ function ProductsMap({ category_id, parent_product_category_id }) {
               </div>
               <div className="flex justify-between mt-6 items-center">
                 <p className="text-2xl font-semibold mt-4">
-                  €{product.original_price || product.sale_price || "N/A"}
+                  €{product.original_price || product.sale_price || 0}
                 </p>
                 <div className="flex gap-6">
                   <ProductDetailsButton />
