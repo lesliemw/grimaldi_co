@@ -6,6 +6,7 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [tempQuantity, setTempQuantity] = useState(1);
 
   // Add an item to the cart
   function addToCart(newItem) {
@@ -38,7 +39,9 @@ export function CartProvider({ children }) {
   function incrementQuantity(id) {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === id
+          ? { ...item, quantity: item.quantity + 1 }
+          : { ...item, quantity: setTempQuantity(tempQuantity + 1) }
       )
     );
   }
