@@ -20,8 +20,6 @@ function ProductDetails({ product, setOpen }) {
     setSize(event.target.value);
   }
 
-  console.log(product);
-
   return (
     <section className="text-gray-700 mt-10 font-themeFont overflow-hidden bg-white ">
       <div className="container px-5">
