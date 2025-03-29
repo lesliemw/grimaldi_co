@@ -3,8 +3,8 @@
 import { memo, useMemo, useState } from "react";
 import { useFilterProductsByCategory } from "../../_api/supabaseApi/useFilterProducts";
 import Loading from "../../loading";
-import ProductDetails from "../../_components/*Products/ProductDetails"; // Import the ProductDetails component
-import Modal from "../UI/Modal"; // Import the Modal component
+import ProductDetails from "../../_components/*Products/ProductDetails";
+import Modal from "../UI/Modal";
 import Image from "next/image";
 import ProductDetailsButton from "../UI/ProductDetailsButton";
 
