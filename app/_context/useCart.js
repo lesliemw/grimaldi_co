@@ -23,7 +23,6 @@ export function CartProvider({ children }) {
             : item
         );
       } else {
-        // Ensure each new item has a unique key
         return [
           ...prevCart,
           {
@@ -48,35 +47,37 @@ export function CartProvider({ children }) {
 
   function incrementQuantity(id, size, newItem) {
     setCart((prevCart) => {
-      const existingItem = prevCart.find(
-        (item) => item.id === id && item.size === size
-      );
+      let itemUpdated = false;
+      const updatedCart = prevCart.map((item) => {
+        if (item.id === id && (!size || item.size === size)) {
+          itemUpdated = true;
+          return { ...item, quantity: Math.min(item.quantity + 1, 100) };
+        }
+        return item;
+      });
 
-      if (existingItem) {
-        // If item exists, increase quantity (max 100)
-        return prevCart.map((item) =>
-          item.id === id && item.size === size && item.quantity < 100
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        // If item does not exist, add it with the correct tempQuantity
-        return [...prevCart, { ...newItem, quantity: tempQuantity }];
+      if (!itemUpdated) {
+        return [
+          ...updatedCart,
+          { ...newItem, quantity: newItem.quantity || 1 },
+        ];
       }
+
+      return updatedCart;
     });
   }
 
   function decrementQuantity(id, size) {
-    setCart(
-      (prevCart) =>
-        prevCart
-          .map((item) =>
-            item.id === id && item.size === size && item.quantity > 1
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-          .filter((item) => item.quantity > 0) // Remove item if quantity reaches 0
-    );
+    setCart((prevCart) => {
+      return prevCart
+        .map((item) => {
+          if (item.id === id && (!size || item.size === size)) {
+            return { ...item, quantity: Math.max(item.quantity - 1, 1) }; // Prevent going below 1
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0); // Remove if quantity is 0 (optional)
+    });
   }
 
   return (
