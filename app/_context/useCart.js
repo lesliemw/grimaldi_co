@@ -19,7 +19,10 @@ export function CartProvider({ children }) {
         // Update quantity if item already exists
         return prevCart.map((item, index) =>
           index === existingItemIndex
-            ? { ...item, quantity: item.quantity + newItem.quantity }
+            ? {
+                ...item,
+                quantity: item.quantity + newItem.quantity,
+              }
             : item
         );
       } else {
@@ -32,7 +35,6 @@ export function CartProvider({ children }) {
         ];
       }
     });
-    console.log(cart);
 
     // Reset temp quantity after adding
     setTempQuantity(1);
