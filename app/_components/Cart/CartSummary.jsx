@@ -42,15 +42,14 @@ function CartSummary() {
               <CartHeader />
               {cart.map((product) => (
                 <MemoizedCartProducts
-                  key={product.id} // Use a stable ID, not the index
-                  id={product.id} // Pass the product ID
+                  key={product.id}
+                  id={product.id}
                   src={product.image}
                   alt={product.product_name}
                   name={product.product_name}
                   description={product.product_description}
                   price={product.price}
                   size={product.size}
-                  // Remove the qty prop, we'll get it from the cart in the component
                 />
               ))}
               <div className="flex flex-wrap items-center gap-4 mt-8">
